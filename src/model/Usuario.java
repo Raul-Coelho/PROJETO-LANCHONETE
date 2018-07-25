@@ -1,3 +1,5 @@
+package model;
+
 import java.time.LocalDate;
 
 public class Usuario extends Pessoa {
@@ -27,3 +29,4 @@ public class Usuario extends Pessoa {
         this.senha = senha;
     }
 }
+

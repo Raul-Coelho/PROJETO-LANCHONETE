@@ -1,3 +1,5 @@
+package model;
+
 import java.time.LocalDate;
 
 public abstract class Pessoa {
@@ -36,3 +38,4 @@ public abstract class Pessoa {
         this.nascimento = nascimento;
     }
 }
+

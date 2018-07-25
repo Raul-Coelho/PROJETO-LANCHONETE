@@ -1,3 +1,5 @@
+package model;
+
 public class Produto {
 
     private int codProduto;
@@ -34,3 +36,4 @@ public class Produto {
         this.precoUnitario = precoUnitario;
     }
 }
+
