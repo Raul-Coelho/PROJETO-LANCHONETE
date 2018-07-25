@@ -5,7 +5,7 @@ public class Garcom extends Funcionario {
     private int matricula;
 
     public Garcom(String nome, String cpf, LocalDate nascimento, float salario, int matricula) {
-        super(nome, cpf, nascimento, salario);
+        super(nome, cpf, nascimento, salario, matricula);
         this.matricula = matricula;
     }
 
