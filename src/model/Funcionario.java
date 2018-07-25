@@ -5,12 +5,12 @@ import java.time.LocalDate;
 public abstract class Funcionario extends Pessoa {
 
     private float salario;
-    private int matricula;
+    private String setor;
 
-    public Funcionario(String nome, String cpf, LocalDate nascimento, float salario, int matricula) {
-        super(nome, cpf, nascimento);
+    public Funcionario(String nome, String cpf, LocalDate nascimento, String email, int telefone, float salario, String setor) {
+        super(nome, cpf, nascimento, email, telefone);
         this.salario = salario;
-        this.matricula = matricula;
+        this.setor = setor;
     }
 
     public float getSalario() {
@@ -21,11 +21,7 @@ public abstract class Funcionario extends Pessoa {
         this.salario = salario;
     }
 
-    public int getMatricula() {
-        return matricula;
-    }
+    public String getSetor() { return setor; }
 
-    public void setMatricula(int matricula) {
-        this.matricula = matricula;
-    }
+    public void setSetor(String setor) { this.setor = setor; }
 }

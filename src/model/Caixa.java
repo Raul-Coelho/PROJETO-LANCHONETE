@@ -7,8 +7,8 @@ public class Caixa extends Funcionario{
     private String status;
     private float valor;
 
-    public Caixa(String nome, String cpf, LocalDate nascimento, float salario, int matricula, String status, float valor) {
-        super(nome, cpf, nascimento, salario, matricula);
+    public Caixa(String nome, String cpf, LocalDate nascimento, String email, int telefone, float salario, String setor, String status, float valor) {
+        super(nome, cpf, nascimento, email, telefone, salario, setor);
         this.status = status;
         this.valor = valor;
     }

@@ -7,11 +7,15 @@ public abstract class Pessoa {
     private String nome;
     private String cpf;
     private LocalDate nascimento;
+    private String email;
+    private int telefone;
 
-    public Pessoa(String nome, String cpf, LocalDate nascimento) {
+    public Pessoa(String nome, String cpf, LocalDate nascimento, String email, int telefone ) {
         this.nome = nome;
         this.cpf = cpf;
         this.nascimento = nascimento;
+        this.email = email;
+        this.telefone = telefone;
     }
 
     public String getNome() {
@@ -37,5 +41,13 @@ public abstract class Pessoa {
     public void setNascimento(LocalDate nascimento) {
         this.nascimento = nascimento;
     }
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
+
+    public int getTelefone() { return telefone; }
+
+    public void setTelefone(int telefone) { this.telefone = telefone; }
+
 }
 

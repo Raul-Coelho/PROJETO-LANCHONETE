@@ -2,20 +2,11 @@ package model;
 
 import java.time.LocalDate;
 
-public class Garcom extends Funcionario {
+public class Garcom extends Funcionario{
 
-    private int matricula;
-
-    public Garcom(String nome, String cpf, LocalDate nascimento, float salario, int matricula) {
-        super(nome, cpf, nascimento, salario, matricula);
-        this.matricula = matricula;
-    }
-
-    public int getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(int matricula) {
-        this.matricula = matricula;
+    public Garcom(String nome, String cpf, LocalDate nascimento, String email, int telefone, float salario, String setor) {
+        super(nome, cpf, nascimento, email, telefone, salario, setor);
     }
 }
+
+
