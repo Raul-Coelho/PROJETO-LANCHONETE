@@ -1,61 +1,38 @@
 package model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 public class Comanda {
 
-    private Produto[] produtos;
-    private int quantidade;
-    private LocalTime horaPedido;
-    private LocalDate dataPedido;
-    private float subtotal;
+    private Pedido[] pedidos;
+    private float total;
+    private String status;
 
-    public Comanda(Produto[] produtos, int quantidade, LocalTime horaPedido, LocalDate dataPedido, float subtotal) {
-        this.produtos = produtos;
-        this.quantidade = quantidade;
-        this.horaPedido = horaPedido;
-        this.dataPedido = dataPedido;
-        this.subtotal = subtotal;
+    public Comanda(Pedido[] pedidos, float total, String status) {
+        this.pedidos = pedidos;
+        this.total = total;
+        this.status = status;
     }
 
-    public Produto[] getProdutos() {
-        return produtos;
+    public Pedido[] getPedidos() {
+        return pedidos;
     }
 
-    public void setProdutos(Produto[] produtos) {
-        this.produtos = produtos;
+    public void setPedidos(Pedido[] pedidos) {
+        this.pedidos = pedidos;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+    public float getTotal() {
+        return total;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setTotal(float total) {
+        this.total = total;
     }
 
-    public LocalTime getHoraPedido() {
-        return horaPedido;
+    public String getStatus() {
+        return status;
     }
 
-    public void setHoraPedido(LocalTime horaPedido) {
-        this.horaPedido = horaPedido;
-    }
-
-    public LocalDate getDataPedido() {
-        return dataPedido;
-    }
-
-    public void setDataPedido(LocalDate dataPedido) {
-        this.dataPedido = dataPedido;
-    }
-
-    public float getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(float subtotal) {
-        this.subtotal = subtotal;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
