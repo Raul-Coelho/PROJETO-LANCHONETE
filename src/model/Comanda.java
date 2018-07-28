@@ -1,15 +1,17 @@
 package model;
 
+import java.util.Arrays;
+
 public class Comanda {
 
     private Pedido[] pedidos;
     private float total;
-    private String status;
+    private boolean aberto;
 
-    public Comanda(Pedido[] pedidos, float total, String status) {
+    public Comanda(Pedido[] pedidos, float total, boolean aberto) {
         this.pedidos = pedidos;
         this.total = total;
-        this.status = status;
+        this.aberto = aberto;
     }
 
     public Pedido[] getPedidos() {
@@ -28,11 +30,20 @@ public class Comanda {
         this.total = total;
     }
 
-    public String getStatus() {
-        return status;
+    public boolean getStatus() {
+        return aberto;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(boolean aberto) {
+        this.aberto = aberto;
+    }
+
+    @Override
+    public String toString() {
+        return "Comanda{" +
+                "pedidos=" + Arrays.toString(pedidos) +
+                ", total=" + total +
+                ", aberto=" + aberto +
+                '}';
     }
 }

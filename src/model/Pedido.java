@@ -4,26 +4,24 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Pedido {
-    private Produto[] produtos;
+    private Produto produto;
     private int quantidade;
     private LocalTime horaPedido;
     private LocalDate dataPedido;
-    private float subtotal;
 
-    public Pedido(Produto[] produtos, int quantidade, LocalTime horaPedido, LocalDate dataPedido, float subtotal) {
-        this.produtos = produtos;
+    public Pedido(Produto produto, int quantidade, LocalTime horaPedido, LocalDate dataPedido) {
+        this.produto = produto;
         this.quantidade = quantidade;
         this.horaPedido = horaPedido;
         this.dataPedido = dataPedido;
-        this.subtotal = subtotal;
     }
 
-    public Produto[] getProdutos() {
-        return produtos;
+    public Produto getProduto() {
+        return produto;
     }
 
-    public void setProdutos(Produto[] produtos) {
-        this.produtos = produtos;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 
     public int getQuantidade() {
@@ -50,12 +48,14 @@ public class Pedido {
         this.dataPedido = dataPedido;
     }
 
-    public float getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(float subtotal) {
-        this.subtotal = subtotal;
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "produto=" + produto +
+                ", quantidade=" + quantidade +
+                ", horaPedido=" + horaPedido +
+                ", dataPedido=" + dataPedido +
+                '}';
     }
 }
 

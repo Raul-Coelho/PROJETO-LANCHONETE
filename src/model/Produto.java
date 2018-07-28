@@ -35,5 +35,14 @@ public class Produto {
     public void setPrecoUnitario(float precoUnitario) {
         this.precoUnitario = precoUnitario;
     }
+
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "codProduto=" + codProduto +
+                ", nome='" + nome + '\'' +
+                ", precoUnitario=" + precoUnitario +
+                '}';
+    }
 }
 

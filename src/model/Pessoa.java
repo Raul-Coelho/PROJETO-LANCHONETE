@@ -41,6 +41,7 @@ public abstract class Pessoa {
     public void setNascimento(LocalDate nascimento) {
         this.nascimento = nascimento;
     }
+
     public String getEmail() { return email; }
 
     public void setEmail(String email) { this.email = email; }
@@ -49,5 +50,15 @@ public abstract class Pessoa {
 
     public void setTelefone(int telefone) { this.telefone = telefone; }
 
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", nascimento=" + nascimento +
+                ", email='" + email + '\'' +
+                ", telefone=" + telefone +
+                '}';
+    }
 }
 
