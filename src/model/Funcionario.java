@@ -2,12 +2,15 @@ package model;
 
 import java.time.LocalDate;
 
-public abstract class Funcionario extends Pessoa {
-    public enum setor{ATENDIMENTO, COZINHA, CAIXA, GERENTE }
+public class Funcionario extends Pessoa {
+    public enum Setor{ATENDIMENTO, COZINHA, CAIXA, GERENTE };
+    private Setor tipo;
     private float salario;
 
-    public Funcionario(String nome, String cpf, LocalDate nascimento, String email, int telefone) {
+    public Funcionario(String nome, String cpf, LocalDate nascimento, String email, int telefone, Setor tipo, float salario) {
         super(nome, cpf, nascimento, email, telefone);
+        this.tipo = tipo;
+        this.salario = salario;
     }
 
     public float getSalario() {
@@ -18,10 +21,19 @@ public abstract class Funcionario extends Pessoa {
         this.salario = salario;
     }
 
+    public Setor getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Setor tipo) {
+        this.tipo = tipo;
+    }
+
     @Override
     public String toString() {
         return "Funcionario{" +
-                "salario=" + salario +
+                "tipo=" + tipo +
+                ", salario=" + salario +
                 '}';
     }
 }

@@ -5,13 +5,20 @@ import java.time.LocalTime;
 
 public class Pedido {
     private Produto produto;
+    private static int id;
+    private int idPedido;
     private int quantidade;
+    private float subtotal;
+    private boolean status;
     private LocalTime horaPedido;
     private LocalDate dataPedido;
 
-    public Pedido(Produto produto, int quantidade, LocalTime horaPedido, LocalDate dataPedido) {
+    public Pedido(Produto produto, int quantidade, float subtotal, LocalTime horaPedido, LocalDate dataPedido) {
         this.produto = produto;
+        idPedido = ++id;
         this.quantidade = quantidade;
+        this.subtotal = subtotal;
+        status = true;
         this.horaPedido = horaPedido;
         this.dataPedido = dataPedido;
     }
@@ -24,12 +31,44 @@ public class Pedido {
         this.produto = produto;
     }
 
+    public static int getId() {
+        return id;
+    }
+
+    public static void setId(int id) {
+        Pedido.id = id;
+    }
+
+    public int getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(int idPedido) {
+        this.idPedido = idPedido;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     public int getQuantidade() {
         return quantidade;
     }
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public float getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(float subtotal) {
+        this.subtotal = subtotal;
     }
 
     public LocalTime getHoraPedido() {
@@ -53,6 +92,7 @@ public class Pedido {
         return "Pedido{" +
                 "produto=" + produto +
                 ", quantidade=" + quantidade +
+                ", subtotal=" + subtotal +
                 ", horaPedido=" + horaPedido +
                 ", dataPedido=" + dataPedido +
                 '}';

@@ -1,25 +1,35 @@
 package model;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Comanda {
 
-    private Pedido[] pedidos;
+    private ArrayList<Pedido> pedidos;
     private float total;
     private boolean aberto;
+    private int mesa;
 
-    public Comanda(Pedido[] pedidos, float total, boolean aberto) {
-        this.pedidos = pedidos;
+    public Comanda( float total,int mesa) {
+        pedidos = new ArrayList<>();
         this.total = total;
-        this.aberto = aberto;
+        this.mesa = mesa;
+        aberto = true;
     }
 
-    public Pedido[] getPedidos() {
+    public ArrayList<Pedido> getPedidos() {
         return pedidos;
     }
 
-    public void setPedidos(Pedido[] pedidos) {
+    public void setPedidos(ArrayList<Pedido> pedidos) {
         this.pedidos = pedidos;
+    }
+
+    public int getMesas() {
+        return mesa;
+    }
+
+    public void setMesas(int mesas) {
+        this.mesa = mesas;
     }
 
     public float getTotal() {
@@ -34,16 +44,22 @@ public class Comanda {
         return aberto;
     }
 
-    public void setStatus(boolean aberto) {
+    public boolean setStatus(boolean aberto) {
         this.aberto = aberto;
+        return aberto;
     }
 
     @Override
     public String toString() {
         return "Comanda{" +
-                "pedidos=" + Arrays.toString(pedidos) +
+                "pedidos=" + pedidos +
                 ", total=" + total +
                 ", aberto=" + aberto +
+                ", mesa=" + mesa +
                 '}';
+    }
+
+    public boolean AdcionarPedido(Pedido pedido){
+      return pedidos.add(pedido);
     }
 }
