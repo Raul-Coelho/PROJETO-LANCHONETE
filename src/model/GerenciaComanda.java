@@ -45,10 +45,6 @@ public class GerenciaComanda {
         return comandas.toString();
     }
 
-//    public boolean Modificar(int mesa,Pedido pedido, int quantidade){
-//
-//    }
-
     public boolean ExcluirPedido(int mesa, Pedido pedido){
        for (int i = 0; i < comandas.size(); i++) {
            if (pedido.getStatus() == false){
@@ -67,6 +63,21 @@ public class GerenciaComanda {
             return comanda.setStatus(false);
         }
         return false;
+    }
+
+    public boolean FecharPedido(GerenciaComanda gC, Comanda comanda, int idPedido){
+      for (int i = 0;i<gC.comandas.size();i++){
+          if (gC.comandas.get(i).equals(comanda)){
+              for (int j = 0; j<gC.comandas.size();j++){
+                  if (comandas.get(i).getPedidos().equals(idPedido)){
+                      comandas.get(i).getPedidos().remove(i);
+                      return true;
+                  }
+              }
+          }
+      }
+      return false;
+
     }
 
 

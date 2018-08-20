@@ -10,7 +10,7 @@ public class Cozinha {
         pedidos= new ArrayList<>();
     }
 
-    public boolean AtenderPedido(Comanda comanda, int idPedido){
+    public boolean AtenderPedido(Comanda comanda, int idPedido, GerenciaComanda gC){
         for (Pedido pedido: pedidos) {
             if (pedido.getIdPedido() == idPedido){
                 pedidos.remove(idPedido);
