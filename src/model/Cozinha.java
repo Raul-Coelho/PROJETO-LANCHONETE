@@ -11,15 +11,15 @@ public class Cozinha {
     }
 
     public boolean AtenderPedido(Comanda comanda, int idPedido){
-        for (Pedido pedidos: pedidos) {
-            if (pedidos.getIdPedido() == idPedido){
-                if (pedidos.getStatus() == true){
-                    return comanda.
+        for (Pedido pedido: pedidos) {
+            if (pedido.getIdPedido() == idPedido){
+                pedidos.remove(idPedido);
+                if (pedido.getStatus() == true){
+                    return comanda.setStatus(false);
                 }
             }
 
         }
+        return false;
     }
-
-
 }
