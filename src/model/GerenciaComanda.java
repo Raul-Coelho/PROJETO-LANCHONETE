@@ -69,8 +69,8 @@ public class GerenciaComanda {
       for (int i = 0;i<gC.comandas.size();i++){
           if (gC.comandas.get(i).equals(comanda)){
               for (int j = 0; j<gC.comandas.size();j++){
-                  if (comandas.get(i).getPedidos().equals(idPedido)){
-                      comandas.get(i).getPedidos().remove(i);
+                  if (comandas.get(i).getPedidos().get(j).equals(idPedido)){
+                      comanda.getPedidos().get(j).setStatus(false);
                       return true;
                   }
               }
