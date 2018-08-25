@@ -75,7 +75,7 @@ public class Comanda {
         }
         return -1;
     }
-    
+
     public float valorTotal() {
         float total = 0;
         for(Pedido pedido : pedidos) {

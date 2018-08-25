@@ -12,11 +12,11 @@ public class GerenciaComanda {
         comandas = new ArrayList<>();
     }
 
-    public boolean NovaComanda(Comanda comanda){
-        if (VerificarComandas(comanda.getMesas()) >= 0){
+    public boolean NovaComanda(int mesa){
+        if (VerificarComandas(mesa) < 0){
             return false;
         }
-        return comandas.add(comanda);
+        return comandas.add(new Comanda(mesa));
     }
 
 
@@ -34,8 +34,19 @@ public class GerenciaComanda {
 
     }
 
+    public int BuscarMesas(int mesa){
+        if (!comandas.isEmpty()){
+            for (int i =0 ;i<comandas.size();i++){
+                if (comandas.get(i).getMesas() == mesa){
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
     public boolean NovoPedido(int mesa, Pedido pedido){
-        if (VerificarComandas(mesa) >= 0){
+        if (VerificarComandas(mesa) < 0){
             return comandas.get(VerificarComandas(mesa)).AdcionarPedido(pedido);
         }
         return false;
@@ -46,11 +57,16 @@ public class GerenciaComanda {
     }
 
 
-    public boolean FecharComanda(int mesa, Comanda comanda, boolean aberto){
-        if (VerificarComandas(comanda.getMesas()) >= 0){
-            return comanda.setStatus(false);
+    public boolean FecharComanda(int mesa){
+        if (BuscarMesas(mesa) == -1){
+            return false;
         }
-        return false;
+        for (Pedido pedidos: comandas.get(mesa).getPedidos()) {
+            if(pedidos.getStatus() == true){
+                return false;
+            }
+        }
+        return Gerencia.adicionarGerencia(comandas.remove(BuscarMesas(mesa)));
     }
 
     public boolean ExcluirPedido(int mesa, Pedido pedido){
