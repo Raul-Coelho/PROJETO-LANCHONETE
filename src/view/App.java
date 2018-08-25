@@ -18,7 +18,7 @@ public class App {
         Produto hamburger = new Produto(2, "Hamburger", 12.00f);
 
         GerenciaComanda gC = new GerenciaComanda();
-        gC.NovaComanda(new Comanda(0, 1));
+        gC.NovaComanda(new Comanda(1, data));
         gC.NovoPedido(1, new Pedido(coca, 1, 7.00f, LocalTime.now(), LocalDate.now()));
         gC.NovoPedido(1, new Pedido(hamburger, 1, 7.50f, LocalTime.now(), LocalDate.now()));
 
@@ -45,7 +45,7 @@ public class App {
                             System.out.println("Informe um Numero Valido !");
                         }
                             if (opcao == 1){
-                                gC.NovaComanda(new Comanda(0,numMesa));
+                                gC.NovaComanda(new Comanda(numMesa, data));
                             }
                             if (opcao == 2){
                                 System.out.println("Informe o Numero da Mesa: ");
@@ -54,13 +54,13 @@ public class App {
                                         gC.VerPedidos(opcao);
                                     }
                             }
-//                            if (opcao == 3){
-//                                System.out.println("Informe o Numero da Mesa: ");
-//                                opcao = ler.nextInt();
-//                                if (gC.VerComandas().get(opcao)!= null) {
-//                                    gC.NovoPedido(opcao,new Pedido())
-//                                }
-//                            }
+                            if (opcao == 3){
+                                System.out.println("Informe o Numero da Mesa: ");
+                                opcao = ler.nextInt();
+                                if (gC.VerComandas().get(opcao)!= null) {
+                                    gC.NovoPedido(opcao,new Pedido())
+                                }
+                            }
                 }
             } while (opcao != 0);
 

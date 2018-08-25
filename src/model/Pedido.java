@@ -9,6 +9,7 @@ public class Pedido {
     private int idPedido;
     private int quantidade;
     private float subtotal;
+    private int mesa;
     private boolean status;
     private LocalTime horaPedido;
     private LocalDate dataPedido;
@@ -64,11 +65,19 @@ public class Pedido {
     }
 
     public float getSubtotal() {
-        return subtotal;
+        return subtotal = getQuantidade() * getProduto().getPrecoUnitario();
     }
 
     public void setSubtotal(float subtotal) {
-        this.subtotal = subtotal;
+       this.subtotal = subtotal;
+    }
+
+    public int getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(int mesa) {
+        this.mesa = mesa;
     }
 
     public LocalTime getHoraPedido() {
@@ -91,8 +100,11 @@ public class Pedido {
     public String toString() {
         return "Pedido{" +
                 "produto=" + produto +
+                ", idPedido=" + idPedido +
                 ", quantidade=" + quantidade +
                 ", subtotal=" + subtotal +
+                ", mesa=" + mesa +
+                ", status=" + status +
                 ", horaPedido=" + horaPedido +
                 ", dataPedido=" + dataPedido +
                 '}';

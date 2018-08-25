@@ -45,22 +45,23 @@ public class GerenciaComanda {
         return comandas.toString();
     }
 
-    public boolean ExcluirPedido(int mesa, Pedido pedido){
-       for (int i = 0; i < comandas.size(); i++) {
-           if (pedido.getStatus() == false){
-               if (VerificarComandas(mesa) >= 0){
-                    if (pedido.getIdPedido() == i){
-                        return comandas.get(VerificarComandas(mesa)).getPedidos().remove(pedido);
-                    }
-               }
-           }
-       }
-        return false;
-    }
 
     public boolean FecharComanda(int mesa, Comanda comanda, boolean aberto){
         if (VerificarComandas(comanda.getMesas()) >= 0){
             return comanda.setStatus(false);
+        }
+        return false;
+    }
+
+    public boolean ExcluirPedido(int mesa, Pedido pedido){
+        for (int i = 0; i < comandas.size(); i++) {
+            if (pedido.getStatus() == false){
+                if (VerificarComandas(mesa) >= 0){
+                    if (pedido.getIdPedido() == i){
+                        return comandas.get(VerificarComandas(mesa)).getPedidos().remove(pedido);
+                    }
+                }
+            }
         }
         return false;
     }
