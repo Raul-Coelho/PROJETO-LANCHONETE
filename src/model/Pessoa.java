@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Pessoa {
 
@@ -8,9 +9,9 @@ public class Pessoa {
     private String cpf;
     private LocalDate nascimento;
     private String email;
-    private int telefone;
+    private String telefone;
 
-    public Pessoa(String nome, String cpf, LocalDate nascimento, String email, int telefone ) {
+    public Pessoa(String nome, String cpf, LocalDate nascimento, String email, String telefone ) {
         this.nome = nome;
         this.cpf = cpf;
         this.nascimento = nascimento;
@@ -46,9 +47,9 @@ public class Pessoa {
 
     public void setEmail(String email) { this.email = email; }
 
-    public int getTelefone() { return telefone; }
+    public String getTelefone() { return telefone; }
 
-    public void setTelefone(int telefone) { this.telefone = telefone; }
+    public void setTelefone(String telefone) { this.telefone = telefone; }
 
     @Override
     public String toString() {

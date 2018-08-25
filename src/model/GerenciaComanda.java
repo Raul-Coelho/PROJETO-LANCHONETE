@@ -41,7 +41,7 @@ public class GerenciaComanda {
         return false;
     }
 
-    public String VerPedidos(Pedido pedido){
+    public String VerPedidos(int mesa){
         return comandas.toString();
     }
 
@@ -79,6 +79,8 @@ public class GerenciaComanda {
       return false;
 
     }
+
+
 
 
 }
