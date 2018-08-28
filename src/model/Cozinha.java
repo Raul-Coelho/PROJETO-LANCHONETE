@@ -1,23 +1,41 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Cozinha {
 
-    private ArrayList<Pedido> pedidos;
+    private List<Pedido> pedidos;
 
     public Cozinha() {
         pedidos = new ArrayList<>();
     }
 
-    public boolean AtenderPedido(Comanda comanda, int idPedido, GerenciaComanda gC) {
-        for (int i = 0; i < pedidos.size(); i++) {
-            if (comanda.getStatus() == true) {
-                if (pedidos.get(i).getStatus() == true) {
-                    return gC.FecharPedido(gC, comanda, pedidos.indexOf(i));
+    public boolean AtenderPedido(int idPedido, GerenciaComanda gC) {
+        if (buscar(idPedido) == -1){
+            return false;
+        }
+        int mesa =pedidos.get(buscar(idPedido)).getMesa();
+        return pedidos.remove(pedidos.get(buscar(idPedido)));
+    }
+
+    int buscar(int idPedido) {
+        if(!pedidos.isEmpty()) {
+            for(int i = 0; i<pedidos.size(); i++) {
+                if(pedidos.get(i).getIdPedido() == idPedido) {
+                    return i;
                 }
             }
         }
-        return false;
+        return -1;
     }
+
+    public String verPedido(){
+        String pedido = null;
+        for (Pedido p: pedidos) {
+            pedido+= "Mesa: "+p.getMesa()+" Pedido: "+p.getIdPedido()+p.toString();
+        }
+        return pedido;
+    }
+
 }

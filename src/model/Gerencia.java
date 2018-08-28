@@ -7,18 +7,29 @@ import java.util.List;
 
 public class Gerencia {
 
-    private static List<Comanda> comandas = new ArrayList<>();
+    private static List<Comanda> gerencia = new ArrayList<>();
 
     static boolean adicionarGerencia(Comanda com) {
-        return comandas.add(com);
+        return gerencia.add(com);
     }
 
-    public List<Comanda> ListarComandas(Comanda comanda, LocalDate dataInicio, LocalDate dataFim){
-        for (int i = 0; i < comandas.size(); i++){
-            if (comandas.get(i).getPedidos().get(i).getDataPedido() == dataInicio && comandas.get(i).getPedidos().get(i).getDataPedido() == dataFim){
-                    return comandas;
+    public String listarComandas(LocalDate inicio, LocalDate fim) {
+        String com = null;
+        for (Comanda comanda : gerencia) {
+            if (comanda.getData().equals(inicio) && comanda.getData().equals(fim)) {
+                com += comanda.toString();
             }
         }
-        return null;
+        return com;
+    }
+
+    public float lucroTotal(LocalDate inicio, LocalDate fim){
+        float lucro = 0f;
+        for (Comanda comanda: gerencia) {
+            if (comanda.getData().equals(inicio) && comanda.getData().equals(fim)){
+                lucro+= comanda.valorTotal();
+            }
+        }
+        return lucro;
     }
 }

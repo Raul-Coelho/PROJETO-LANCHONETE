@@ -12,6 +12,7 @@ public class App {
 
         Scanner ler = new Scanner(System.in);
         CadastroUsuario cadastroUsuario = new CadastroUsuario();
+        GerenciaComanda gC = new GerenciaComanda();
 
 
         ////////////
@@ -20,8 +21,6 @@ public class App {
         Produto coca = new Produto(1, "Coca-Cola", 7.00f);
         Produto hamburger = new Produto(2, "Hamburger", 12.00f);
 
-        GerenciaComanda gC = new GerenciaComanda();
-        gC.NovaComanda(new Comanda(1));
         gC.NovoPedido(1, new Pedido(coca, 1, 7.00f, LocalTime.now(), LocalDate.now()));
         gC.NovoPedido(1, new Pedido(hamburger, 1, 7.50f, LocalTime.now(), LocalDate.now()));
 
@@ -33,12 +32,12 @@ public class App {
             int opcao = 0;
             String email,senha;
             do {
-                System.out.print("----------------TELA INICIAL--------------\n"
+                System.out.print("------------- - WELCOME - ------------\n"
                         + "Usuário(email):");
                 email = ler.next();
                 System.out.print("Senha:");
                 senha = ler.next();
-                System.out.print("1-Autenticar        2-Criar nova conta        0-Voltar\n>>>>>");
+                System.out.print("1-Autenticar        2-Criar nova conta        0-Voltar\n");
                 opcao = ler.nextInt();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 if(opcao == 1 && cadastroUsuario.isAutenticar(email, senha)) {
@@ -59,9 +58,39 @@ public class App {
                             System.out.println("\n1 - Nova Comanda  2 - Ver Pedidos  3 - Fazer Pedido  \n 4-Encerrar Comanda  0-Sair");
                             opcao = ler.nextInt();
                             if(opcao == 1) {
-                                System.out.println(gC.NovaComanda(mesa));
+                                System.out.println(gC.NovaComanda(numMesa));
                             }
+                            else
+                                if (opcao == 2){
+                                    System.out.println(gC.VerPedidos(numMesa));
+                                }
+                                else
+                                    if (opcao == 3){
+                                        // FazerPedido Precisa do Cardapio
+                                    }
+                                    else
+                                        if (opcao == 4){
+                                            System.out.println(gC.FecharComanda(numMesa));
+                                        }
+                        }
+                        else
+                            if (opcao == 3){
+                                System.out.print("Informe\n1-Editar Usuário     2-Excluir Usuário     0-Sair\n");
+                                opcao = ler.nextInt();
 
+                                if (opcao == 1){
+                                    System.out.print("Informe o E-mail que quer Editar:");
+                                    email = ler.next();
+                                    System.out.println(cadastroUsuario.isEditar(email, isCadastrar()));
+                                }
+                                else
+                                    if (opcao == 2){
+                                        System.out.println(cadastroUsuario.isRemove(email));
+                                    }
+                            }
+                            else
+                                if (opcao == 4){
+                                    System.out.println();
                                 }
                 }
             } while (opcao != 0);

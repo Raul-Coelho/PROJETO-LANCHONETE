@@ -34,6 +34,10 @@ public class Comanda {
         this.mesa = mesas;
     }
 
+    public LocalDate getData() {
+        return data;
+    }
+
     public boolean getStatus() {
         return aberto;
     }
