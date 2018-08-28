@@ -5,11 +5,13 @@ public class Produto {
     private int codProduto;
     private String nome;
     private float precoUnitario;
+    private String descricao;
 
-    public Produto(int codProduto, String nome, float precoUnitario) {
+    public Produto(int codProduto, String nome, float precoUnitario, String descricao) {
         this.codProduto = codProduto;
         this.nome = nome;
         this.precoUnitario = precoUnitario;
+        this.descricao = descricao;
     }
 
     public int getCodProduto() {
@@ -36,12 +38,21 @@ public class Produto {
         this.precoUnitario = precoUnitario;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     @Override
     public String toString() {
         return "Produto{" +
                 "codProduto=" + codProduto +
                 ", nome='" + nome + '\'' +
                 ", precoUnitario=" + precoUnitario +
+                ", descricao='" + descricao + '\'' +
                 '}';
     }
 }
