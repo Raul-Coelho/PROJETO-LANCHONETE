@@ -1,30 +1,55 @@
 package model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+
+import static view.App.isCadastrarProduto;
 
 public class CadastroPedido {
-    private Map<String,Produto> produtos;
+    private ArrayList<Produto> produtos;
     private Produto ProdutoTeste;
 
     public CadastroPedido() {
-        produtos = new HashMap<>();
-        ProdutoTeste= new Produto(0,"agua da torneira", 0.1f,"agua potavel");
+        produtos = new ArrayList<>();
     }
-    public Map<String,Produto> listar(){
+
+    public ArrayList<Produto> listar(){
         return produtos;
     }
 
-    public Produto isBuscar(int codProduto){
-        if(produtos.isEmpty()){
-            return null;
+    int isBuscar(int codProduto){
+        if(produtos.isEmpty())
+            return -1;
+        for(int i = 0; i<produtos.size();i++) {
+            if(produtos.get(i).getCodProduto() == codProduto) {
+                return i;
+            }
         }
-        return produtos.get(codProduto);
+        return -1;
     }
 
     public boolean isSalvar(Produto produto){
-
+        if(isBuscar(produto.getCodProduto()) >=0 ) {
+            return false;
+        }
+        return produtos.add(produto);
     }
+
+    public Produto isRemover(int codProduto){
+        if (isBuscar(codProduto) < 0){
+            System.out.println("Produto Inexistente");
+        }
+        return produtos.remove(isBuscar(codProduto));
+    }
+
+    public boolean isEdit(int codProduto){
+
+        if (isBuscar(codProduto) < 0){
+            return false;
+        }
+        isRemover(isBuscar(codProduto));
+        return isSalvar(isCadastrarProduto());
+    }
+
 
 
 

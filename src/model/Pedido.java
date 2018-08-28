@@ -52,8 +52,9 @@ public class Pedido {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public boolean setStatus(boolean status) {
         this.status = status;
+        return status;
     }
 
     public int getQuantidade() {

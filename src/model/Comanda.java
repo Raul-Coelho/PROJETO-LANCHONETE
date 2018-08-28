@@ -11,7 +11,7 @@ public class Comanda {
     private int mesa;
     private final LocalDate data;
 
-    public Comanda(int mesa, LocalDate now) {
+    public Comanda(int mesa) {
         data = LocalDate.now();
         pedidos = new ArrayList<>();
         this.mesa = mesa;

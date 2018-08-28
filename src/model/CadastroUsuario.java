@@ -9,7 +9,6 @@ public class CadastroUsuario {
 
     public CadastroUsuario(){
         usuarios = new HashMap<>();
-        loginMaster = new Funcionario("Master", "111.111.111-01",LocalDate.of(2018,1,1), "master@gmail.com","master123","9999999",Funcionario.Setor.ATENDIMENTO);
     }
 
     public boolean isSalvar(Funcionario usuario) {

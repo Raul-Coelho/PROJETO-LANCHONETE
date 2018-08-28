@@ -13,10 +13,10 @@ public class GerenciaComanda {
     }
 
     public boolean NovaComanda(int mesa){
-        if (VerificarComandas(mesa) < 0){
+        if (BuscarMesas(mesa) < 0){
             return false;
         }
-        return comandas.add(new Comanda(mesa, LocalDate.now()));
+        return comandas.add(new Comanda(mesa));
     }
 
 
@@ -24,15 +24,6 @@ public class GerenciaComanda {
         return comandas;
     }
 
-    int VerificarComandas(int mesa){
-       for (int i = 0; i < comandas.size(); i++){
-           if (comandas.get(i).getMesas() == mesa){
-               return i;
-           }
-       }
-        return -1;
-
-    }
 
     public int BuscarMesas(int mesa){
         if (!comandas.isEmpty()){
@@ -46,8 +37,8 @@ public class GerenciaComanda {
     }
 
     public boolean NovoPedido(int mesa, Pedido pedido){
-        if (VerificarComandas(mesa) < 0){
-            return comandas.get(VerificarComandas(mesa)).AdcionarPedido(pedido);
+        if (BuscarMesas(mesa) > 0){
+            return comandas.get(BuscarMesas(mesa)).AdcionarPedido(pedido);
         }
         return false;
     }
@@ -72,9 +63,9 @@ public class GerenciaComanda {
     public boolean ExcluirPedido(int mesa, Pedido pedido){
         for (int i = 0; i < comandas.size(); i++) {
             if (pedido.getStatus() == false){
-                if (VerificarComandas(mesa) >= 0){
+                if (BuscarMesas(mesa) > 0){
                     if (pedido.getIdPedido() == i){
-                        return comandas.get(VerificarComandas(mesa)).getPedidos().remove(pedido);
+                        return comandas.get(BuscarMesas(mesa)).getPedidos().remove(pedido);
                     }
                 }
             }
@@ -82,16 +73,9 @@ public class GerenciaComanda {
         return false;
     }
 
-    public boolean FecharPedido(GerenciaComanda gC, Comanda comanda, int idPedido){
-      for (int i = 0;i<gC.comandas.size();i++){
-          if (gC.comandas.get(i).equals(comanda)){
-              for (int j = 0; j<gC.comandas.size();j++){
-                  if (comandas.get(i).getPedidos().get(j).equals(idPedido)){
-                      comanda.getPedidos().get(j).setStatus(false);
-                      return true;
-                  }
-              }
-          }
+    public boolean FecharPedido(GerenciaComanda gC,int idPedido, int mesa){
+      if (gC.BuscarMesas(mesa) > 0){
+          return comandas.get(mesa).getPedidos().get(idPedido).setStatus(false);
       }
       return false;
 

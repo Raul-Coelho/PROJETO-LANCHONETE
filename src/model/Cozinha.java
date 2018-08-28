@@ -11,12 +11,13 @@ public class Cozinha {
         pedidos = new ArrayList<>();
     }
 
-    public boolean AtenderPedido(int idPedido, GerenciaComanda gC) {
-        if (buscar(idPedido) == -1){
+    public boolean AtenderPedido(Pedido pedido, GerenciaComanda gC) {
+        if (buscar(pedido.getIdPedido()) == -1){
             return false;
         }
-        int mesa =pedidos.get(buscar(idPedido)).getMesa();
-        return pedidos.remove(pedidos.get(buscar(idPedido)));
+        int mesa =pedidos.get(buscar(pedido.getIdPedido())).getMesa();
+        gC.FecharPedido(gC,pedido.getIdPedido(),pedido.getMesa());
+        return pedidos.remove(pedidos.get(buscar(pedido.getIdPedido())));
     }
 
     int buscar(int idPedido) {

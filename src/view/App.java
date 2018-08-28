@@ -13,16 +13,15 @@ public class App {
         Scanner ler = new Scanner(System.in);
         CadastroUsuario cadastroUsuario = new CadastroUsuario();
         GerenciaComanda gC = new GerenciaComanda();
-
+        Cozinha cozinha = new Cozinha();
+        CadastroPedido cP = new CadastroPedido();
 
         ////////////
 
 
-        Produto coca = new Produto(1, "Coca-Cola", 7.00f);
-        Produto hamburger = new Produto(2, "Hamburger", 12.00f);
-
-        gC.NovoPedido(1, new Pedido(coca, 1, 7.00f, LocalTime.now(), LocalDate.now()));
-        gC.NovoPedido(1, new Pedido(hamburger, 1, 7.50f, LocalTime.now(), LocalDate.now()));
+        cP.isSalvar(new Produto(01,"Hot Dog",5.00f,"Pao,Salsisha e Molho especial"));
+        cP.isSalvar(new Produto(02,"Coxinha",3.00f,"Frango desfiado com massa pronta"));
+        cP.isSalvar(new Produto(03,"Café",1.50f,"Bebida a base de cafeina"));
 
 
         ///////////
@@ -30,16 +29,23 @@ public class App {
 
         //  menu principal
             int opcao = 0;
-            String email,senha;
+            String email = null,senha = null;
             do {
-                System.out.print("------------- - WELCOME - ------------\n"
-                        + "Usuário(email):");
-                email = ler.next();
-                System.out.print("Senha:");
-                senha = ler.next();
-                System.out.print("1-Autenticar        2-Criar nova conta        0-Voltar\n");
+                System.out.print("------------- - WELCOME - ------------\n");
+
+                System.out.print("1-Autenticar        2-Criar conta\n");
                 opcao = ler.nextInt();
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if (opcao == 1) {
+                    System.out.println("EMAIL:\n");
+                    email = ler.next();
+                    System.out.print("Senha:");
+                    senha = ler.next();
+                }
+                else
+                    if (opcao == 2){
+                        cadastroUsuario.isSalvar(isCadastrar());
+                    }
+                    
                 if(opcao == 1 && cadastroUsuario.isAutenticar(email, senha)) {
                     System.out.println("\n1 - Cardapio   2 - Mesas   3 - Minha Conta \n 4 - Cozinha   5 - Gerencia   0 - Sair");
                     opcao = ler.nextInt();
@@ -48,7 +54,34 @@ public class App {
                         System.out.println("CODIGO NÃO ENCONTRADO !");
                     }
                     if (opcao == 1){
-                        // CARDAPIO
+                        System.out.println("---- CARDAPIO ----\n PRODUTOS: \n");
+                        for (Produto produto : cP.listar()) {
+                            System.out.println(produto);
+                        }
+                        System.out.print("1-Salvar     2-Excluir     3-Editar     0-Sair\n");
+                        opcao = ler.nextInt();
+                        if (opcao == 1){
+                            System.out.println(cP.isSalvar(isCadastrarProduto()));
+                        }
+                        else
+                            if (opcao == 2){
+                                System.out.println("INFORME O CODIGO DO PRODUTO: ");
+                                int codproduto = ler.nextInt();
+                                System.out.println(cP.isEdit(codproduto));
+                            }
+                            else
+                                if (opcao == 3){
+                                    System.out.println("PEDIDO FEITO!"+isCadastrar());
+                                }
+                                else
+                                    if (opcao == 4){
+                                        System.out.println("INFORME A MESA: ");
+                                        int mesa = ler.nextInt();
+                                        if (gC.BuscarMesas(mesa) > 0){
+                                            gC.FecharComanda(mesa);
+                                        }
+                                    }
+
                     }
                     else
                         if (opcao == 2){
@@ -79,7 +112,7 @@ public class App {
                                 opcao = ler.nextInt();
 
                                 if (opcao == 1){
-                                    System.out.print("Informe o E-mail que quer Editar:");
+                                    System.out.print("INFORME O EMAIL QUE QUER EDITAR:");
                                     email = ler.next();
                                     System.out.println(cadastroUsuario.isEditar(email, isCadastrar()));
                                 }
@@ -96,6 +129,39 @@ public class App {
             } while (opcao != 0);
 
     }
+
+    /////////////// CADASTRAR PRODUTO ///////////////////////////
+
+    public static Produto isCadastrarProduto(){
+
+        Scanner ler = new Scanner(System.in);
+        System.out.println("BEM VINDO AO CADASTRO DO PRODUTO\n");
+
+        System.out.println("INFORME O CODIGO DO PRODUTO: \n");
+        int codProduto = ler.nextInt();
+
+        System.out.println("INFORME O NOME DO PRODUTO: \n");
+        String nome = ler.next();
+
+        System.out.println("INFORME A DESCRIÇÃO DO PRODUTO: \n");
+        String descricao = ler.next();
+
+        System.out.println("INFORME O PREÇO DO PRODUTO: \n");
+        float preco = ler.nextFloat();
+
+        if (codProduto < 0 ){
+            System.out.println("INFORME CODIGO VALIDO PARA PRODUTO!");
+        }
+        if (preco < 0){
+            System.out.println("INFORME UM VALOR VALIDO PARA PREÇO!");
+        }
+
+        return new Produto(codProduto,nome,preco,descricao);
+    }
+
+    ////////////////////  CADASTRO USUARIO //////////////////////////
+
+
     static Funcionario isCadastrar() {
 
         Scanner ler = new Scanner(System.in);
