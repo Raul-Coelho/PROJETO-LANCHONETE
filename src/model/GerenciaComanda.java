@@ -1,7 +1,7 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class GerenciaComanda {
 
@@ -16,7 +16,7 @@ public class GerenciaComanda {
         if (VerificarComandas(mesa) < 0){
             return false;
         }
-        return comandas.add(new Comanda(mesa));
+        return comandas.add(new Comanda(mesa, LocalDate.now()));
     }
 
 
