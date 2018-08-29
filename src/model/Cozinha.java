@@ -1,5 +1,7 @@
 package model;
 
+import control.GerenciaComanda;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +13,13 @@ public class Cozinha {
         pedidos = new ArrayList<>();
     }
 
-    public boolean AtenderPedido(Pedido pedido, GerenciaComanda gC) {
-        if (buscar(pedido.getIdPedido()) == -1){
+    public boolean AtenderPedido(int idPedido, GerenciaComanda gC) {
+        if (buscar(idPedido) == -1){
             return false;
         }
-        int mesa =pedidos.get(buscar(pedido.getIdPedido())).getMesa();
-        gC.FecharPedido(gC,pedido.getIdPedido(),pedido.getMesa());
-        return pedidos.remove(pedidos.get(buscar(pedido.getIdPedido())));
+        int mesa =pedidos.get(buscar(idPedido)).getMesa();
+        gC.FecharPedido(gC,idPedido,mesa);
+        return pedidos.remove(pedidos.get(buscar(idPedido)));
     }
 
     int buscar(int idPedido) {

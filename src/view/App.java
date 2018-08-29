@@ -1,9 +1,12 @@
 package view;
 
+import control.CadastroPedido;
+import control.CadastroUsuario;
+import control.Gerencia;
+import control.GerenciaComanda;
 import model.*;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Scanner;
 
 public class App {
@@ -28,24 +31,19 @@ public class App {
 
 
         //  menu principal
-            int opcao = 0;
+            int opcao = 1;
             String email = null,senha = null;
-            do {
+            while (opcao != 0){
                 System.out.print("------------- - WELCOME - ------------\n");
 
                 System.out.print("1-Autenticar        2-Criar conta\n");
                 opcao = ler.nextInt();
                 if (opcao == 1) {
-                    System.out.println("EMAIL:\n");
+                    System.out.println("EMAIL: ");
                     email = ler.next();
-                    System.out.print("Senha:");
+                    System.out.print("Senha: ");
                     senha = ler.next();
                 }
-                else
-                    if (opcao == 2){
-                        cadastroUsuario.isSalvar(isCadastrar());
-                    }
-                    
                 if(opcao == 1 && cadastroUsuario.isAutenticar(email, senha)) {
                     System.out.println("\n1 - Cardapio   2 - Mesas   3 - Minha Conta \n 4 - Cozinha   5 - Gerencia   0 - Sair");
                     opcao = ler.nextInt();
@@ -123,10 +121,35 @@ public class App {
                             }
                             else
                                 if (opcao == 4){
-                                    System.out.println();
+                                    System.out.println(cozinha.verPedido()+"INFORME O NUMERO DO PEDIDO: ");
+                                    int num = ler.nextInt();
+                                    System.out.println(cozinha.AtenderPedido(num,gC));
                                 }
+                                else
+                                    if (opcao == 5){
+
+                                        LocalDate dataInicio = null, dataFim = null;
+                                        System.out.println("1 - VER COMANDAS   2 - VER VALOR TOTAL");
+                                        opcao = ler.nextInt();
+                                        if (opcao == 1 || opcao == 2){
+                                            System.out.println("INFORME A DATA DE INICIO");
+                                            dataInicio = criarData(ler);
+                                            System.out.println("INFORME A DATA DE FIM");
+                                            dataFim = criarData(ler);
+                                        }
+                                        if (opcao == 1){
+                                            System.out.println(Gerencia.listarComandas(dataInicio,dataFim));
+                                        }
+                                        else
+                                            if (opcao == 2) {
+                                                System.out.println(Gerencia.lucroTotal(dataInicio, dataFim));
+                                            }
+                                    }
+                                    else {
+                                        opcao = 0;
+                                    }
                 }
-            } while (opcao != 0);
+            }
 
     }
 
@@ -211,14 +234,14 @@ public class App {
         return new Funcionario(nome, cpf, dt, email, senha, telefone, setor);
     }
 
-    static LocalDate criarData(Scanner ler) {
-        System.out.print("Informe o ano:");
+    public static LocalDate criarData(Scanner ler) {
+        System.out.print("INFORME O ANO:");
         int ano = ler.nextInt();
 
-        System.out.print("Informe o mês:");
+        System.out.print("INFORME O MES:");
         int mes = ler.nextInt();
 
-        System.out.print("Informe o dia do mês:");
+        System.out.print("INFORME O DIA:");
         int dia = ler.nextInt();
 
         return LocalDate.of(ano, mes, dia);

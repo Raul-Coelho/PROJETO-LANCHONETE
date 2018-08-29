@@ -1,10 +1,12 @@
-package model;
+package control;
+import model.Funcionario;
+
 import java.time.LocalDate;
 import java.util.*;
 
 public class CadastroUsuario {
 
-    private Map<String,Funcionario> usuarios;
+    private Map<String, Funcionario> usuarios;
     private Funcionario loginMaster;
 
     public CadastroUsuario(){

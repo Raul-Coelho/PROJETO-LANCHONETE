@@ -1,4 +1,6 @@
-package model;
+package control;
+
+import model.Produto;
 
 import java.util.ArrayList;
 

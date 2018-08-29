@@ -1,6 +1,8 @@
-package model;
+package control;
 
-import java.time.LocalDate;
+import model.Comanda;
+import model.Pedido;
+
 import java.util.ArrayList;
 
 public class GerenciaComanda {
