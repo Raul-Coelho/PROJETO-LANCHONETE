@@ -44,6 +44,10 @@ public class App {
                     System.out.print("Senha: ");
                     senha = ler.next();
                 }
+                else
+                if (opcao == 2){
+                    cadastroUsuario.isSalvar(isCadastrar());
+                }
                 if(opcao == 1 && cadastroUsuario.isAutenticar(email, senha)) {
                     System.out.println("\n1 - Cardapio   2 - Mesas   3 - Minha Conta \n 4 - Cozinha   5 - Gerencia   0 - Sair");
                     opcao = ler.nextInt();

@@ -4,6 +4,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A classe <b>Comanda</b> modela a entidade <b>Comanda</b> do domínio da aplicação, onde terão métodos e dominios da mesma
+ * @author RaulRomulo
+ * @since 1.0
+ * @version 1.0
+ */
+
 public class Comanda {
 
     private List<Pedido> pedidos;
@@ -11,12 +18,26 @@ public class Comanda {
     private int mesa;
     private final LocalDate data;
 
+    /**
+     * Atributos da entidade <b>Comanda</b>
+     * Classe contem uma estrutura lista de pedido com vários pedidos, indicando que seria uma comanda
+     * Atributo boleano para um pedido aberto ou fechado
+     * @param mesa indica uma mesa para a comanda
+     * Data indica a data do pedido
+     *
+     */
+
     public Comanda(int mesa) {
         data = LocalDate.now();
         pedidos = new ArrayList<>();
         this.mesa = mesa;
         aberto = true;
     }
+
+    /**
+     * retorna uma lista dos pedidos
+     * @return pedidos
+     */
 
     public List<Pedido> getPedidos() {
         return pedidos;
@@ -26,6 +47,11 @@ public class Comanda {
         this.pedidos = pedidos;
     }
 
+    /**
+     * retorna a mesa
+     * @return mesa
+     */
+
     public int getMesas() {
         return mesa;
     }
@@ -34,9 +60,19 @@ public class Comanda {
         this.mesa = mesas;
     }
 
+    /**
+     * retorna a data do pedido
+     * @return data
+     */
+
     public LocalDate getData() {
         return data;
     }
+
+    /**
+     * retorna o status do pedido
+     * @return status
+     */
 
     public boolean getStatus() {
         return aberto;
@@ -47,6 +83,11 @@ public class Comanda {
         return aberto;
     }
 
+
+    /**
+     * metodo toString que é uma representação textual da classe
+     *
+     */
     @Override
     public String toString() {
         return "Comanda{" +
@@ -56,12 +97,21 @@ public class Comanda {
                 '}';
     }
 
-
+    /**
+     *
+     * @param pedido  Usa como parametro pedido e serve para adicionar pedidos a uma comanda
+     * @return pedido
+     */
     public boolean AdcionarPedido(Pedido pedido){
         pedido.setMesa(mesa);
       return pedidos.add(pedido);
     }
 
+    /**
+     *
+     * @param numeroPedido Usa como parametro numeroPedido e serve para remover pedidos de uma comanda
+     * @return pedido
+     */
     public boolean removePedido(int numeroPedido) {
         if(pedidos.remove(buscarPedido(numeroPedido))!= null) {
             return true;
@@ -69,6 +119,11 @@ public class Comanda {
         return false;
     }
 
+    /**
+     *
+     * @param numeroPedido Usa como parametro numeroPedido e serve para buscar e informar se o pedido e o numero do pedido
+     * @return i ou -1
+     */
     public int buscarPedido(int numeroPedido) {
         if(!pedidos.isEmpty()) {
             for(int i=0;i<pedidos.size();i++) {
@@ -80,6 +135,10 @@ public class Comanda {
         return -1;
     }
 
+    /**
+     * Serve para informar o valor da comanda
+     * @return total
+     */
     public float valorTotal() {
         float total = 0;
         for(Pedido pedido : pedidos) {
