@@ -10,8 +10,20 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class App {
+    /**
+     * A classe <b>App</b> contém o método main para interagir com a aplicaçãp
+     * @author RaulRomulo
+     * @since 1.0
+     * @version 1.0
+     */
 
+    /**
+     *
+     * @param args indica argumentos
+     */
     public static void main(String[] args) {
+
+
 
         Scanner ler = new Scanner(System.in);
         CadastroUsuario cadastroUsuario = new CadastroUsuario();
@@ -19,7 +31,7 @@ public class App {
         Cozinha cozinha = new Cozinha();
         CadastroPedido cP = new CadastroPedido();
 
-        ////////////
+
 
 
         cP.isSalvar(new Produto(01,"Hot Dog",5.00f,"Pao,Salsisha e Molho especial"));
@@ -29,7 +41,9 @@ public class App {
 
         ///////////
 
-
+/**
+ * menu principal da aplicação, onde vai ter interação com o usuário
+ */
         //  menu principal
             int opcao = 1;
             String email = null,senha = null;
@@ -157,7 +171,10 @@ public class App {
 
     }
 
-    /////////////// CADASTRAR PRODUTO ///////////////////////////
+    /**
+     * método principal para cadastro produto, onde vai ter a interação com o usuário
+     * @return produto cadastrado
+     */
 
     public static Produto isCadastrarProduto(){
 
@@ -188,11 +205,15 @@ public class App {
 
     ////////////////////  CADASTRO USUARIO //////////////////////////
 
+    /**
+     * Método principal para cadastrar usuário, onde vai ter a interação com o usuário
+     * @return funcionário cadastrado
+     */
 
     static Funcionario isCadastrar() {
 
         Scanner ler = new Scanner(System.in);
-        System.out.println("BEM VINDO AO CADASTRO DE USUÁRIOS\n");
+        System.out.println("BEM VINDO AO CADASTRO DE USUARIOS\n");
 
         System.out.println("INFORME SEU CPF: \n");
         String cpf = ler.nextLine();
@@ -238,6 +259,12 @@ public class App {
         return new Funcionario(nome, cpf, dt, email, senha, telefone, setor);
     }
 
+    /**
+     *
+     * @param ler indica um atributo para ler data
+     * Método para formatar e ler a data, onde vai ter interação com o usuário
+     * @return data indicada
+     */
     public static LocalDate criarData(Scanner ler) {
         System.out.print("INFORME O ANO:");
         int ano = ler.nextInt();

@@ -26,7 +26,6 @@ public class Comanda {
      * Data indica a data do pedido
      *
      */
-
     public Comanda(int mesa) {
         data = LocalDate.now();
         pedidos = new ArrayList<>();
@@ -35,9 +34,9 @@ public class Comanda {
     }
 
     /**
-     * Metodos get e set da classe <b>Comanda</b>
+     * get e set da classe pedidos
+     * @return aponta e retorna os atributos da classse
      */
-
     public List<Pedido> getPedidos() {
         return pedidos;
     }

@@ -37,9 +37,9 @@ public class Pessoa {
     }
 
     /**
-     * Metodos get e set da classe <b>Pessoa</b>
+     * get e set da classe Pessoa
+     * @return aponta e retorna os atributos da classse
      */
-
     public String getNome() {
         return nome;
     }
@@ -78,7 +78,10 @@ public class Pessoa {
 
     public void setTelefone(String telefone) { this.telefone = telefone; }
 
-
+    /**
+     * metodo toString que é uma representação textual da classe
+     *
+     */
     @Override
     public String toString() {
         return "Pessoa{" +
