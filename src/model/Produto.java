@@ -28,8 +28,7 @@ public class Produto {
         this.descricao = descricao;
     }
     /**
-     * Retorna codigo do <b>Produto</b>
-     * @return codigo
+     * Metodos get e set da classe <b>Produto</b>
      */
     public int getCodProduto() {
         return codProduto;
@@ -39,10 +38,6 @@ public class Produto {
         this.codProduto = codProduto;
     }
 
-    /**
-     * Retorna nome o <b>Produto</b>
-     * @return nome
-     */
     public String getNome() {
         return nome;
     }
@@ -51,10 +46,6 @@ public class Produto {
         this.nome = nome;
     }
 
-    /**
-     * Retorna o preço do <b>Produto</b>
-     * @return preço
-     */
     public float getPrecoUnitario() {
         return precoUnitario;
     }
@@ -63,10 +54,6 @@ public class Produto {
         this.precoUnitario = precoUnitario;
     }
 
-    /**
-     * Retorna a descrição <b>Produto</b>
-     * @return descrição
-     */
     public String getDescricao() {
         return descricao;
     }

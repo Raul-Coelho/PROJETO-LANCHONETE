@@ -35,9 +35,9 @@ public class Funcionario extends Pessoa {
     }
 
     /**
-     * Retorna o tipo do setor do <b>funcionário</b>
-     * @return tipo
+     * Metodos get e set da classe <b>Funcionario</b>
      */
+
     public Setor getTipo() {
         return tipo;
     }
@@ -46,10 +46,7 @@ public class Funcionario extends Pessoa {
         this.tipo = tipo;
     }
 
-    /**
-     * Retorna a senha do <b>funcionário</b>
-     * @return senha
-     */
+
     public String getSenha() {
         return senha;
     }
@@ -59,7 +56,7 @@ public class Funcionario extends Pessoa {
     }
 
     /**
-     * metodo toString que é uma representação textual da classe
+     * Metodo toString que é uma representação textual da classe
      *
      */
     @Override

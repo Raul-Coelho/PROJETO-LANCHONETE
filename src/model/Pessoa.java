@@ -35,10 +35,11 @@ public class Pessoa {
         this.email = email;
         this.telefone = telefone;
     }
+
     /**
-     * Retorna o nome da <b>Pessoa</b>
-     * @return o nome da <b>Pessoa</b>
+     * Metodos get e set da classe <b>Pessoa</b>
      */
+
     public String getNome() {
         return nome;
     }
@@ -46,10 +47,7 @@ public class Pessoa {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    /**
-     * Retorna o cpf da <b>Pessoa</b>
-     * @return o cpf da <b>Pessoa</b>
-     */
+
     public String getCpf() {
         return cpf;
     }
@@ -57,10 +55,7 @@ public class Pessoa {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    /**
-     * Retorna a data de nascimento da <b>Pessoa</b>
-     * @return a data de nascimento <b>Pessoa</b>
-     */
+
     public LocalDate getNascimento() {
         return nascimento;
     }
@@ -68,10 +63,7 @@ public class Pessoa {
     public void setNascimento(LocalDate nascimento) {
         this.nascimento = nascimento;
     }
-    /**
-     * Retorna o email da <b>Pessoa</b>
-     * @return o email da <b>Pessoa</b>
-     */
+
     public String getEmail(){
         return email;
     }
@@ -79,20 +71,14 @@ public class Pessoa {
     public void setEmail(String email){
         this.email = email;
     }
-    /**
-     * Retorna o numero do telefone da <b>Pessoa</b>
-     * @return o numero do telefone <b>Pessoa</b>
-     */
+
     public String getTelefone(){
         return telefone;
     }
 
     public void setTelefone(String telefone) { this.telefone = telefone; }
 
-    /**
-     * metodo toString que é uma representação textual da classe
-     *
-     */
+
     @Override
     public String toString() {
         return "Pessoa{" +

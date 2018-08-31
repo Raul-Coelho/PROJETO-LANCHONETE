@@ -35,8 +35,7 @@ public class Comanda {
     }
 
     /**
-     * retorna uma lista dos pedidos
-     * @return pedidos
+     * Metodos get e set da classe <b>Comanda</b>
      */
 
     public List<Pedido> getPedidos() {
@@ -47,11 +46,6 @@ public class Comanda {
         this.pedidos = pedidos;
     }
 
-    /**
-     * retorna a mesa
-     * @return mesa
-     */
-
     public int getMesas() {
         return mesa;
     }
@@ -60,19 +54,9 @@ public class Comanda {
         this.mesa = mesas;
     }
 
-    /**
-     * retorna a data do pedido
-     * @return data
-     */
-
     public LocalDate getData() {
         return data;
     }
-
-    /**
-     * retorna o status do pedido
-     * @return status
-     */
 
     public boolean getStatus() {
         return aberto;
@@ -82,7 +66,6 @@ public class Comanda {
         this.aberto = aberto;
         return aberto;
     }
-
 
     /**
      * metodo toString que é uma representação textual da classe
@@ -106,7 +89,6 @@ public class Comanda {
         pedido.setMesa(mesa);
       return pedidos.add(pedido);
     }
-
     /**
      *
      * @param numeroPedido Usa como parametro numeroPedido e serve para remover pedidos de uma comanda
@@ -118,7 +100,6 @@ public class Comanda {
         }
         return false;
     }
-
     /**
      *
      * @param numeroPedido Usa como parametro numeroPedido e serve para buscar e informar se o pedido e o numero do pedido
@@ -134,7 +115,6 @@ public class Comanda {
         }
         return -1;
     }
-
     /**
      * Serve para informar o valor da comanda
      * @return total

@@ -3,6 +3,13 @@ package model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * A classe <b>Pedido</b> modela a entidade <b>Pedido</b> do domínio da aplicação.
+ * @author RaulRomulo
+ * @since 1.0
+ * @version 1.o
+ */
+
 public class Pedido {
     private Produto produto;
     private static int id;
@@ -14,6 +21,18 @@ public class Pedido {
     private LocalTime horaPedido;
     private LocalDate dataPedido;
 
+    /**
+     * Atributos da classe <b>Pedido</b>
+     * @param produto indica o atributo produto para o pedido
+     * @param quantidade indica a quantidade de produtos
+     * @param subtotal indica o subtotal do valor do pedido
+     * @param horaPedido indica a hora em que o pedido foi recebido
+     * @param dataPedido indica a data em que o pedido foi recebido
+     * O status indica o status do pedido, sendo aberto ou fechado
+     * O idpedido indica o numero do pedido
+     * A mesa indica a mesa onde sera atendido o pedido
+     */
+
     public Pedido(Produto produto, int quantidade, float subtotal, LocalTime horaPedido, LocalDate dataPedido) {
         this.produto = produto;
         idPedido = ++id;
@@ -23,6 +42,10 @@ public class Pedido {
         this.horaPedido = horaPedido;
         this.dataPedido = dataPedido;
     }
+
+    /**
+     * Metodos get e set da classe <b>Pedido</b>
+     */
 
     public Produto getProduto() {
         return produto;
@@ -97,6 +120,10 @@ public class Pedido {
         this.dataPedido = dataPedido;
     }
 
+    /**
+     * metodo toString que é uma representação textual da classe
+     *
+     */
     @Override
     public String toString() {
         return "Pedido{" +
