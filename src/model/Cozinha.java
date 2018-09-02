@@ -23,6 +23,16 @@ public class Cozinha {
         pedidos = new ArrayList<>();
     }
 
+
+    /**
+     *
+     * @param pedido
+     * @return adiciona pedidos ao array de pedidos
+     */
+    public boolean addnaCozinha(Pedido pedido){
+        return pedidos.add(pedido);
+    }
+
     /**
      *
      * @param idPedido indica o id do pedido
@@ -35,7 +45,7 @@ public class Cozinha {
         if (buscar(idPedido) == -1){
             return false;
         }
-        int mesa =pedidos.get(buscar(idPedido)).getMesa();
+        int mesa = pedidos.get(buscar(idPedido)).getMesa();
         gC.FecharPedido(gC,idPedido,mesa);
         return pedidos.remove(pedidos.get(buscar(idPedido)));
     }

@@ -1,6 +1,7 @@
 package control;
 
 import model.Comanda;
+import model.Cozinha;
 import model.Pedido;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class GerenciaComanda {
     }
 
     public boolean NovaComanda(int mesa){
-        if (BuscarMesas(mesa) < 0){
+        if (BuscarMesas(mesa) != -1){
             return false;
         }
         return comandas.add(new Comanda(mesa));
@@ -38,8 +39,9 @@ public class GerenciaComanda {
         return -1;
     }
 
-    public boolean NovoPedido(int mesa, Pedido pedido){
-        if (BuscarMesas(mesa) > 0){
+    public boolean NovoPedido(int mesa, Pedido pedido, Cozinha cozinha){
+        if (BuscarMesas(mesa) != -1){
+            cozinha.addnaCozinha(pedido);
             return comandas.get(BuscarMesas(mesa)).AdcionarPedido(pedido);
         }
         return false;
@@ -76,11 +78,10 @@ public class GerenciaComanda {
     }
 
     public boolean FecharPedido(GerenciaComanda gC,int idPedido, int mesa){
-      if (gC.BuscarMesas(mesa) > 0){
-          return comandas.get(mesa).getPedidos().get(idPedido).setStatus(false);
+      if (gC.BuscarMesas(mesa) >= 0){
+          return comandas.get(BuscarMesas(mesa)).getPedidos().get(idPedido).setStatus(false);
       }
       return false;
-
     }
 
 

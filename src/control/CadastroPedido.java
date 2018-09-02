@@ -55,6 +55,20 @@ public class CadastroPedido {
 
     /**
      *
+     * @param codigo indica o codigo que referencia o produto
+     * @return um produto escolhido ou null
+     */
+
+    public Produto retornaProduto(int codigo) {
+        for(Produto p: produtos) {
+            if(p.getCodProduto() == codigo)
+                return p;
+        }
+        return null;
+    }
+
+    /**
+     *
      * @param produto indica o produto
      * Metodo Salva os produtos
      * @return produto adicionado
@@ -74,22 +88,21 @@ public class CadastroPedido {
      * @return o produto removido
      */
 
-    public Produto isRemover(int codProduto){
+    public boolean isRemover(int codProduto){
         if (isBuscar(codProduto) < 0){
             System.out.println("Produto Inexistente");
         }
-        return produtos.remove(isBuscar(codProduto));
+        return produtos.remove(retornaProduto(codProduto));
     }
 
     /**
      *
      * @param codProduto indica o codigo do produto
-     * Busca o produto para ser editado
+     * Busca o produto para ser editado remove o antigo e cadastra o novo
      * @return o produto editado
      */
 
     public boolean isEdit(int codProduto){
-
         if (isBuscar(codProduto) < 0){
             return false;
         }

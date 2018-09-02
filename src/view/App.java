@@ -7,6 +7,8 @@ import control.GerenciaComanda;
 import model.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class App {
@@ -14,6 +16,7 @@ public class App {
     public static void main(String[] args) {
 
         Scanner ler = new Scanner(System.in);
+        Scanner parada = new Scanner(System.in);
         CadastroUsuario cadastroUsuario = new CadastroUsuario();
         GerenciaComanda gC = new GerenciaComanda();
         Cozinha cozinha = new Cozinha();
@@ -22,9 +25,10 @@ public class App {
         ////////////
 
 
-        cP.isSalvar(new Produto(01,"Hot Dog",5.00f,"Pao,Salsisha e Molho especial"));
-        cP.isSalvar(new Produto(02,"Coxinha",3.00f,"Frango desfiado com massa pronta"));
-        cP.isSalvar(new Produto(03,"Café",1.50f,"Bebida a base de cafeina"));
+        cP.isSalvar(new Produto(1,"Hot Dog",5.00f,"Pao,Salsisha e Molho especial"));
+        cP.isSalvar(new Produto(2,"Coxinha",3.00f,"Frango desfiado com massa pronta"));
+        cP.isSalvar(new Produto(3,"Café",1.50f,"Bebida a base de cafeina"));
+        cP.isSalvar(new Produto(4,"Pastel",2.50f,"Pastes de Frango"));
 
 
         ///////////
@@ -32,6 +36,7 @@ public class App {
 
         //  menu principal
             int opcao = 1;
+            int parar = 0;
             String email = null,senha = null;
             while (opcao != 0){
                 System.out.print("------------- - WELCOME - ------------\n");
@@ -49,109 +54,107 @@ public class App {
                     cadastroUsuario.isSalvar(isCadastrar());
                 }
                 if(opcao == 1 && cadastroUsuario.isAutenticar(email, senha)) {
-                    System.out.println("\n1 - Cardapio   2 - Mesas   3 - Minha Conta \n 4 - Cozinha   5 - Gerencia   0 - Sair");
-                    opcao = ler.nextInt();
-                    System.out.print("\n");
-                    if(opcao < 0 || opcao > 5){
-                        System.out.println("CODIGO NÃO ENCONTRADO !");
-                    }
-                    if (opcao == 1){
-                        System.out.println("---- CARDAPIO ----\n PRODUTOS: \n");
-                        for (Produto produto : cP.listar()) {
-                            System.out.println(produto);
-                        }
-                        System.out.print("1-Salvar     2-Excluir     3-Editar     0-Sair\n");
+
+                    while (opcao != 0) {
+                        System.out.println("\n1 - Cardapio   2 - Mesas   3 - Minha Conta \n 4 - Cozinha   5 - Gerencia   0 - Sair");
                         opcao = ler.nextInt();
-                        if (opcao == 1){
-                            System.out.println(cP.isSalvar(isCadastrarProduto()));
+                        System.out.print("\n");
+                        if (opcao < 0 || opcao > 5) {
+                            System.out.println("CODIGO NÃO ENCONTRADO !");
                         }
-                        else
-                            if (opcao == 2){
+                        if (opcao == 1) {
+                            System.out.println("---- CARDAPIO ----\n PRODUTOS: \n");
+                            for (Produto produto : cP.listar()) {
+                                System.out.println(produto);
+                            }
+                            System.out.print("1-Salvar     2-Excluir     3-Editar     0-Sair\n");
+                            opcao = ler.nextInt();
+                            if (opcao == 1) {
+                                System.out.println(cP.isSalvar(isCadastrarProduto()));
+                            } else if (opcao == 2) {
                                 System.out.println("INFORME O CODIGO DO PRODUTO: ");
                                 int codproduto = ler.nextInt();
-                                System.out.println(cP.isEdit(codproduto));
+                                System.out.println(cP.isRemover(codproduto));
+                            } else if (opcao == 3) {
+                                System.out.println("INFORME O CODIGO DO PRODUTO: ");
+                                int codproduto = ler.nextInt();
+                                cP.isRemover(codproduto);
+                                System.out.println(cP.isSalvar(isCadastrarProduto()));
                             }
-                            else
-                                if (opcao == 3){
-                                    System.out.println("PEDIDO FEITO!"+isCadastrar());
-                                }
-                                else
-                                    if (opcao == 4){
-                                        System.out.println("INFORME A MESA: ");
-                                        int mesa = ler.nextInt();
-                                        if (gC.BuscarMesas(mesa) > 0){
-                                            gC.FecharComanda(mesa);
-                                        }
-                                    }
-
-                    }
-                    else
-                        if (opcao == 2){
-                        System.out.println("Informe o Numero da Mesa: ");
-                        int numMesa = ler.nextInt();
+                        } else if (opcao == 2) {
+                            System.out.println("INFORME O NUMERO DA MESA: ");
+                            int numMesa = ler.nextInt();
 
                             System.out.println("\n1 - Nova Comanda  2 - Ver Pedidos  3 - Fazer Pedido  \n 4-Encerrar Comanda  0-Sair");
                             opcao = ler.nextInt();
-                            if(opcao == 1) {
+                            if (opcao == 1) {
                                 System.out.println(gC.NovaComanda(numMesa));
-                            }
-                            else
-                                if (opcao == 2){
-                                    System.out.println(gC.VerPedidos(numMesa));
-                                }
-                                else
-                                    if (opcao == 3){
-                                        // FazerPedido Precisa do Cardapio
+                            } else if (opcao == 2) {
+                                System.out.println(gC.VerPedidos(numMesa));
+                            } else if (opcao == 3) {
+                                do {
+                                    for (Produto p : cP.listar()) {
+                                        System.out.println(p);
                                     }
-                                    else
-                                        if (opcao == 4){
-                                            System.out.println(gC.FecharComanda(numMesa));
-                                        }
+                                    System.out.println("\nINFORME O CODIGO DO PRODUTO: ");
+                                    int codProduto = ler.nextInt();
+
+                                    System.out.println("INFORME A QUANTIDADE: ");
+                                    int quant = ler.nextInt();
+
+                                    System.out.println(gC.NovoPedido(numMesa, new Pedido(cP.retornaProduto(codProduto), quant, cP.retornaProduto(codProduto).getPrecoUnitario() * quant, LocalTime.now(), LocalDate.now()), cozinha) +
+                                            "\nOUTRO PEDIDO ?\n 1 - SIM    0 - NÃO");
+                            } while (parada.nextInt()==1) ;
+                            }
+                             else if (opcao == 4) {
+                                System.out.println(gC.FecharComanda(numMesa));
+                            }
+                        } else if (opcao == 3) {
+                            System.out.print("Informe\n1-Editar Usuário     2-Excluir Usuário     0-Sair\n");
+                            opcao = ler.nextInt();
+
+                            if (opcao == 1) {
+                                System.out.print("INFORME O EMAIL QUE QUER EDITAR:");
+                                email = ler.next();
+                                System.out.println(cadastroUsuario.isEditar(email, isCadastrar()));
+                            } else if (opcao == 2) {
+                                System.out.println("INFORME O EMAIL QUE QUER EXCLUIR: ");
+                                email = ler.next();
+                                System.out.println(cadastroUsuario.isRemove(email));
+                                System.out.println("AUTENTIQUE: \nEMAIL: ");
+                                email = ler.next();
+                                System.out.println("SENHA: ");
+                                senha = ler.next();
+                                if (cadastroUsuario.isAutenticar(email,senha) == true){
+                                    opcao = 2;
+                                }else {
+                                    opcao = 0;
+                                }
+                            }
+                        } else if (opcao == 4) {
+                            System.out.println(cozinha.verPedido() + "\nINFORME O NUMERO DO PEDIDO: ");
+                            int num = ler.nextInt();
+                            System.out.println(cozinha.AtenderPedido(num,gC));
+                        } else if (opcao == 5) {
+
+                            LocalDate dataInicio = null, dataFim = null;
+                            System.out.println("1 - VER COMANDAS   2 - VER VALOR TOTAL");
+                            opcao = ler.nextInt();
+                            if (opcao == 1 || opcao == 2) {
+                                System.out.println("INFORME A DATA DE INICIO");
+                                dataInicio = criarData(ler);
+                                System.out.println("INFORME A DATA DE FIM");
+                                dataFim = criarData(ler);
+                            }
+                            if (opcao == 1) {
+                                System.out.println(Gerencia.listarComandas(dataInicio, dataFim));
+                            } else if (opcao == 2) {
+                                System.out.println(Gerencia.lucroTotal(dataInicio, dataFim));
+                            }
+                        } else {
+                            opcao = 0;
                         }
-                        else
-                            if (opcao == 3){
-                                System.out.print("Informe\n1-Editar Usuário     2-Excluir Usuário     0-Sair\n");
-                                opcao = ler.nextInt();
-
-                                if (opcao == 1){
-                                    System.out.print("INFORME O EMAIL QUE QUER EDITAR:");
-                                    email = ler.next();
-                                    System.out.println(cadastroUsuario.isEditar(email, isCadastrar()));
-                                }
-                                else
-                                    if (opcao == 2){
-                                        System.out.println(cadastroUsuario.isRemove(email));
-                                    }
-                            }
-                            else
-                                if (opcao == 4){
-                                    System.out.println(cozinha.verPedido()+"INFORME O NUMERO DO PEDIDO: ");
-                                    int num = ler.nextInt();
-                                    System.out.println(cozinha.AtenderPedido(num,gC));
-                                }
-                                else
-                                    if (opcao == 5){
-
-                                        LocalDate dataInicio = null, dataFim = null;
-                                        System.out.println("1 - VER COMANDAS   2 - VER VALOR TOTAL");
-                                        opcao = ler.nextInt();
-                                        if (opcao == 1 || opcao == 2){
-                                            System.out.println("INFORME A DATA DE INICIO");
-                                            dataInicio = criarData(ler);
-                                            System.out.println("INFORME A DATA DE FIM");
-                                            dataFim = criarData(ler);
-                                        }
-                                        if (opcao == 1){
-                                            System.out.println(Gerencia.listarComandas(dataInicio,dataFim));
-                                        }
-                                        else
-                                            if (opcao == 2) {
-                                                System.out.println(Gerencia.lucroTotal(dataInicio, dataFim));
-                                            }
-                                    }
-                                    else {
-                                        opcao = 0;
-                                    }
+                    }
                 }
             }
 
@@ -162,6 +165,7 @@ public class App {
     public static Produto isCadastrarProduto(){
 
         Scanner ler = new Scanner(System.in);
+        ler.useLocale(Locale.US);
         System.out.println("BEM VINDO AO CADASTRO DO PRODUTO\n");
 
         System.out.println("INFORME O CODIGO DO PRODUTO: \n");
@@ -170,11 +174,11 @@ public class App {
         System.out.println("INFORME O NOME DO PRODUTO: \n");
         String nome = ler.next();
 
+        System.out.println("INFORME O PREÇO DO PRODUTO: \n");
+        float preco = Float.parseFloat(String.valueOf(ler.nextFloat()));
+
         System.out.println("INFORME A DESCRIÇÃO DO PRODUTO: \n");
         String descricao = ler.next();
-
-        System.out.println("INFORME O PREÇO DO PRODUTO: \n");
-        float preco = ler.nextFloat();
 
         if (codProduto < 0 ){
             System.out.println("INFORME CODIGO VALIDO PARA PRODUTO!");
