@@ -1,7 +1,7 @@
 package view;
 
-import control.CadastroPedido;
-import control.CadastroUsuario;
+import control.GerenciaCardapio;
+import control.GerenciaUsuario;
 import control.Gerencia;
 import control.GerenciaComanda;
 import model.*;
@@ -29,15 +29,15 @@ public class App {
 
         Scanner ler = new Scanner(System.in);
         Scanner parada = new Scanner(System.in);
-        CadastroUsuario cadastroUsuario = new CadastroUsuario();
+        GerenciaUsuario cadastroUsuario = new GerenciaUsuario();
         GerenciaComanda gC = new GerenciaComanda();
         Cozinha cozinha = new Cozinha();
-        CadastroPedido cP = new CadastroPedido();
+        GerenciaCardapio cP = new GerenciaCardapio();
 
-        cP.isSalvar(new Produto(1,"Hot Dog",5.00f,"Pao,Salsisha e Molho especial"));
-        cP.isSalvar(new Produto(2,"Coxinha",3.00f,"Frango desfiado com massa pronta"));
-        cP.isSalvar(new Produto(3,"Café",1.50f,"Bebida a base de cafeina"));
-        cP.isSalvar(new Produto(4,"Pastel",2.50f,"Pastes de Frango"));
+        cP.Salvar(new Produto(1,"Hot Dog",5.00f,"Pao,Salsisha e Molho especial"));
+        cP.Salvar(new Produto(2,"Coxinha",3.00f,"Frango desfiado com massa pronta"));
+        cP.Salvar(new Produto(3,"Café",1.50f,"Bebida a base de cafeina"));
+        cP.Salvar(new Produto(4,"Pastel",2.50f,"Pastes de Frango"));
 
 /**
  * menu principal da aplicação, onde vai ter interação com o usuário
@@ -60,7 +60,7 @@ public class App {
                 if (opcao == 2){
                     cadastroUsuario.isSalvar(isCadastrar());
                 }
-                if(opcao == 1 && cadastroUsuario.isAutenticar(email, senha)) {
+                if(opcao == 1 && cadastroUsuario.Autenticar(email, senha)) {
 
                     while (opcao != 0) {
                         System.out.println("\n1 - Cardapio   2 - Mesas   3 - Minha Conta \n 4 - Cozinha   5 - Gerencia   0 - Sair");
@@ -77,7 +77,7 @@ public class App {
                             System.out.print("1-Salvar     2-Excluir     3-Editar     0-Sair\n");
                             opcao = ler.nextInt();
                             if (opcao == 1) {
-                                System.out.println(cP.isSalvar(isCadastrarProduto()));
+                                System.out.println(cP.Salvar(isCadastrarProduto()));
                             } else if (opcao == 2) {
                                 System.out.println("INFORME O CODIGO DO PRODUTO: ");
                                 int codproduto = ler.nextInt();
@@ -86,7 +86,7 @@ public class App {
                                 System.out.println("INFORME O CODIGO DO PRODUTO: ");
                                 int codproduto = ler.nextInt();
                                 cP.isRemover(codproduto);
-                                System.out.println(cP.isSalvar(isCadastrarProduto()));
+                                System.out.println(cP.Salvar(isCadastrarProduto()));
                             }
                         } else if (opcao == 2) {
                             System.out.println("INFORME O NUMERO DA MESA: ");
@@ -123,16 +123,16 @@ public class App {
                             if (opcao == 1) {
                                 System.out.print("INFORME O EMAIL QUE QUER EDITAR:");
                                 email = ler.next();
-                                System.out.println(cadastroUsuario.isEditar(email, isCadastrar()));
+                                System.out.println(cadastroUsuario.Editar(email, isCadastrar()));
                             } else if (opcao == 2) {
                                 System.out.println("INFORME O EMAIL QUE QUER EXCLUIR: ");
                                 email = ler.next();
-                                System.out.println(cadastroUsuario.isRemove(email));
+                                System.out.println(cadastroUsuario.Remove(email));
                                 System.out.println("AUTENTIQUE: \nEMAIL: ");
                                 email = ler.next();
                                 System.out.println("SENHA: ");
                                 senha = ler.next();
-                                if (cadastroUsuario.isAutenticar(email,senha) == true){
+                                if (cadastroUsuario.Autenticar(email,senha) == true){
                                     opcao = 2;
                                 }else {
                                     opcao = 0;

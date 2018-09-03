@@ -12,7 +12,7 @@ import java.util.*;
  * @version 1.0
  */
 
-public class CadastroUsuario {
+public class GerenciaUsuario {
     /**
      * A classe inicializa uma estrutura HashMap de funcionario com vários usuários
      */
@@ -22,7 +22,7 @@ public class CadastroUsuario {
     /**
      * Metodo usario para salvar e inicializar o usuário na estrutura
      */
-    public CadastroUsuario(){
+    public GerenciaUsuario(){
         usuarios = new HashMap<>();
     }
 
@@ -33,7 +33,7 @@ public class CadastroUsuario {
      * @return se tem ou não um funcionário salvo com o mesmo email
      */
     public boolean isSalvar(Funcionario usuario) {
-        if(isBuscar(usuario.getEmail())== null) {
+        if(Buscar(usuario.getEmail())== null) {
             usuarios.put(usuario.getEmail(), usuario);
             return true;
         }
@@ -47,8 +47,8 @@ public class CadastroUsuario {
      * Metodo para autenticar o usuário para acessar o sistema
      * @return se tem ou não o usuário cadastrado
      */
-    public boolean isAutenticar(String email, String senha){
-        Funcionario func = isBuscar(email);
+    public boolean Autenticar(String email, String senha){
+        Funcionario func = Buscar(email);
         if (func != null){
             if (func.getSenha().equals(senha)){
                 return true;
@@ -63,8 +63,8 @@ public class CadastroUsuario {
      * Metodo busca e remove um funcionario cadastrado
      * @return remove o usuário se estiver cadastrado no sistema
      */
-    public boolean isRemove(String email){
-        Funcionario func = isBuscar(email);
+    public boolean Remove(String email){
+        Funcionario func = Buscar(email);
         if (func!=null){
                 return usuarios.remove(email,func);
         }
@@ -78,9 +78,9 @@ public class CadastroUsuario {
      * Metodo edita dados do usuário
      * @return o usuário salvo se ele estiver cadastrado
      */
-    public boolean isEditar(String email, Funcionario usuario){
-        if (isBuscar(email)!= null){
-            isRemove(email);
+    public boolean Editar(String email, Funcionario usuario){
+        if (Buscar(email)!= null){
+            Remove(email);
             return isSalvar(usuario);
         }
         return false;
@@ -100,7 +100,7 @@ public class CadastroUsuario {
      * Método busca usuários cadastrados
      * @return usuários cadastrados
      */
-    public Funcionario isBuscar(String email) {
+    public Funcionario Buscar(String email) {
         if(usuarios.isEmpty()) {
             return null;
         }

@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import static view.App.isCadastrarProduto;
 
 /**
- * A classe <b>CadastroPedido</b> contém os métodos da classe para serem usados no domínio da aplicação.
+ * A classe <b>GerenciaCardapio</b> contém os métodos da classe para serem usados no domínio da aplicação.
  * Usada para cadastrar produtos do domínio.
  * @author RaulRomulo
  * @since 1.0
  * @version 1.0
  */
 
-public class CadastroPedido {
+public class GerenciaCardapio {
     private ArrayList<Produto> produtos;
     private Produto ProdutoTeste;
 
@@ -22,7 +22,7 @@ public class CadastroPedido {
      * A classe inicializa uma estrutura arraylist com vários produtos
      */
 
-    public CadastroPedido() {
+    public GerenciaCardapio() {
         produtos = new ArrayList<>();
     }
 
@@ -41,7 +41,7 @@ public class CadastroPedido {
      * Metodo percorre a lista de produtos e informa a posição do pedido
      * @return posição do produto
      */
-    int isBuscar(int codProduto){
+    int Buscar(int codProduto){
         if(produtos.isEmpty())
             return -1;
         for(int i = 0; i<produtos.size();i++) {
@@ -72,8 +72,8 @@ public class CadastroPedido {
      * Metodo Salva os produtos
      * @return produto adicionado
      */
-    public boolean isSalvar(Produto produto){
-        if(isBuscar(produto.getCodProduto()) >=0 ) {
+    public boolean Salvar(Produto produto){
+        if(Buscar(produto.getCodProduto()) >=0 ) {
             return false;
         }
         return produtos.add(produto);
@@ -87,7 +87,7 @@ public class CadastroPedido {
      */
 
     public boolean isRemover(int codProduto){
-        if (isBuscar(codProduto) < 0){
+        if (Buscar(codProduto) < 0){
             System.out.println("Produto Inexistente");
         }
         return produtos.remove(retornaProduto(codProduto));
@@ -100,10 +100,10 @@ public class CadastroPedido {
      * @return o produto editado
      */
     public boolean isEdit(int codProduto){
-        if (isBuscar(codProduto) < 0){
+        if (Buscar(codProduto) < 0){
             return false;
         }
-        isRemover(isBuscar(codProduto));
-        return isSalvar(isCadastrarProduto());
+        isRemover(Buscar(codProduto));
+        return Salvar(isCadastrarProduto());
     }
 }
