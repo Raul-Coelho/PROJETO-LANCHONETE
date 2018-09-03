@@ -12,8 +12,20 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class App {
+    /**
+     * A classe <b>App</b> contém o método main para interagir com a aplicaçãp
+     * @author RaulRomulo
+     * @since 1.0
+     * @version 1.0
+     */
 
+    /**
+     *
+     * @param args indica argumentos
+     */
     public static void main(String[] args) {
+
+
 
         Scanner ler = new Scanner(System.in);
         Scanner parada = new Scanner(System.in);
@@ -22,19 +34,14 @@ public class App {
         Cozinha cozinha = new Cozinha();
         CadastroPedido cP = new CadastroPedido();
 
-        ////////////
-
-
         cP.isSalvar(new Produto(1,"Hot Dog",5.00f,"Pao,Salsisha e Molho especial"));
         cP.isSalvar(new Produto(2,"Coxinha",3.00f,"Frango desfiado com massa pronta"));
         cP.isSalvar(new Produto(3,"Café",1.50f,"Bebida a base de cafeina"));
         cP.isSalvar(new Produto(4,"Pastel",2.50f,"Pastes de Frango"));
 
-
-        ///////////
-
-
-        //  menu principal
+/**
+ * menu principal da aplicação, onde vai ter interação com o usuário
+ */
             int opcao = 1;
             int parar = 0;
             String email = null,senha = null;
@@ -160,7 +167,10 @@ public class App {
 
     }
 
-    /////////////// CADASTRAR PRODUTO ///////////////////////////
+    /**
+     * método principal para cadastro produto, onde vai ter a interação com o usuário
+     * @return produto cadastrado
+     */
 
     public static Produto isCadastrarProduto(){
 
@@ -192,11 +202,15 @@ public class App {
 
     ////////////////////  CADASTRO USUARIO //////////////////////////
 
+    /**
+     * Método principal para cadastrar usuário, onde vai ter a interação com o usuário
+     * @return funcionário cadastrado
+     */
 
     static Funcionario isCadastrar() {
 
         Scanner ler = new Scanner(System.in);
-        System.out.println("BEM VINDO AO CADASTRO DE USUÁRIOS\n");
+        System.out.println("BEM VINDO AO CADASTRO DE USUARIOS\n");
 
         System.out.println("INFORME SEU CPF: \n");
         String cpf = ler.nextLine();
@@ -216,7 +230,7 @@ public class App {
         System.out.println("INFORME SUA DATA DE NASCIMENTO: \n");
         LocalDate dt = criarData(ler);
 
-        System.out.println("INFORME SEU SETOR: \n 1 - Atendimento\n 2 - Cozinha\n 3 - Caixa\n 4 - Gerencia");
+        System.out.println("INFORME SEU SETOR: \n 1 - Atendimento\n 2 - Cozinha\n 3 - Caixa\n 4 - Gerencia\n");
         int valSetor = ler.nextInt();
 
         if (valSetor < 1 || valSetor > 4) {
@@ -242,6 +256,12 @@ public class App {
         return new Funcionario(nome, cpf, dt, email, senha, telefone, setor);
     }
 
+    /**
+     *
+     * @param ler indica um atributo para ler data
+     * Método para formatar e ler a data, onde vai ter interação com o usuário
+     * @return data indicada
+     */
     public static LocalDate criarData(Scanner ler) {
         System.out.print("INFORME O ANO:");
         int ano = ler.nextInt();

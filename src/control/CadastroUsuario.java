@@ -16,14 +16,12 @@ public class CadastroUsuario {
     /**
      * A classe inicializa uma estrutura HashMap de funcionario com vários usuários
      */
-
     private Map<String, Funcionario> usuarios;
     private Funcionario loginMaster;
 
     /**
      * Metodo usario para salvar e inicializar o usuário na estrutura
      */
-
     public CadastroUsuario(){
         usuarios = new HashMap<>();
     }
@@ -34,7 +32,6 @@ public class CadastroUsuario {
      * Metodo usado para cadastrar um novo usuário
      * @return se tem ou não um funcionário salvo com o mesmo email
      */
-
     public boolean isSalvar(Funcionario usuario) {
         if(isBuscar(usuario.getEmail())== null) {
             usuarios.put(usuario.getEmail(), usuario);
@@ -50,7 +47,6 @@ public class CadastroUsuario {
      * Metodo para autenticar o usuário para acessar o sistema
      * @return se tem ou não o usuário cadastrado
      */
-
     public boolean isAutenticar(String email, String senha){
         Funcionario func = isBuscar(email);
         if (func != null){
@@ -67,7 +63,6 @@ public class CadastroUsuario {
      * Metodo busca e remove um funcionario cadastrado
      * @return remove o usuário se estiver cadastrado no sistema
      */
-
     public boolean isRemove(String email){
         Funcionario func = isBuscar(email);
         if (func!=null){
@@ -83,7 +78,6 @@ public class CadastroUsuario {
      * Metodo edita dados do usuário
      * @return o usuário salvo se ele estiver cadastrado
      */
-
     public boolean isEditar(String email, Funcionario usuario){
         if (isBuscar(email)!= null){
             isRemove(email);
@@ -96,7 +90,6 @@ public class CadastroUsuario {
      * Metodo lista os usuários cadastrados
      * @return usuários cadastrados
      */
-
     public Map<String,Funcionario> isListar(){
         return usuarios;
     }
@@ -107,7 +100,6 @@ public class CadastroUsuario {
      * Método busca usuários cadastrados
      * @return usuários cadastrados
      */
-
     public Funcionario isBuscar(String email) {
         if(usuarios.isEmpty()) {
             return null;

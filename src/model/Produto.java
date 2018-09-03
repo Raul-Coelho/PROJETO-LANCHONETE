@@ -20,7 +20,6 @@ public class Produto {
      * @param precoUnitario indica o preço do produto
      * @param descricao indica uma descrição sobre o produto
      */
-
     public Produto(int codProduto, String nome, float precoUnitario, String descricao) {
         this.codProduto = codProduto;
         this.nome = nome;
@@ -29,6 +28,7 @@ public class Produto {
     }
     /**
      * Metodos get e set da classe <b>Produto</b>
+     * @return aponta e retorna os atributos da classse
      */
     public int getCodProduto() {
         return codProduto;

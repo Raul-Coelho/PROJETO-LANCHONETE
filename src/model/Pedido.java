@@ -45,6 +45,7 @@ public class Pedido {
 
     /**
      * Metodos get e set da classe <b>Pedido</b>
+     * @return aponta e retorna os atributos da classse
      */
 
     public Produto getProduto() {

@@ -11,14 +11,12 @@ import java.util.List;
  * @since 1.0
  * @version 1.0
  */
-
 public class Cozinha {
     private List<Pedido> pedidos;
 
     /**
      * A classe <b>cozinha</b> contém a estrutura de dados lista onde os pedidos seriam armazenados
      */
-
     public Cozinha() {
         pedidos = new ArrayList<>();
     }
@@ -40,7 +38,6 @@ public class Cozinha {
      * Usa como referência o idPedido e GerenciaComanda e o metodo adiciona o pedido a uma mesa.
      * @return o Pedido
      */
-
     public boolean AtenderPedido(int idPedido, GerenciaComanda gC) {
         if (buscar(idPedido) == -1){
             return false;
@@ -56,7 +53,6 @@ public class Cozinha {
      * Usa como referencia o idPedido e busca se tem pedidos armazenados
      * @return se tem ou nao pedidos armazenados
      */
-
     int buscar(int idPedido) {
         if(!pedidos.isEmpty()) {
             for(int i = 0; i<pedidos.size(); i++) {
@@ -72,7 +68,6 @@ public class Cozinha {
      * Percorre a estrutura de Pedido e retorna o Pedido
      * @return o pedido
      */
-
     public String verPedido(){
         String pedido = null;
         for (Pedido p: pedidos) {

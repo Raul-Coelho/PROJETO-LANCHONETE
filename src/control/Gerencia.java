@@ -5,10 +5,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/////////////////////////////////////////////////////
-//////////////////NÂO TERMINADA/////////////////////
-///////////////////////////////////////////////////
-
 /**
  * A classe <b>Gerencia</b> contém os métodos da classe para serem usados no domínio da aplicação
  * @author RaulRomulo
@@ -21,27 +17,25 @@ public class Gerencia {
     /**
      * A classe inicializa uma estrutura lista com várias comandas para serem gerenciadas
      */
-
     private static List<Comanda> gerencia = new ArrayList<>();
 
     /**
      *
-     * @param com indica a comanda
+     * @param com indica a comanda a ser gerenciada
      * Método adiciona comandas para serem gerenciadas
-     * @return
+     * @return comanda a ser gerenciada
      */
-
     public static boolean adicionarGerencia(Comanda com) {
         return gerencia.add(com);
     }
 
     /**
      *
-     * @param inicio
-     * @param fim
-     * @return
+     * @param inicio indica o inicio do atendimento
+     * @param fim indica o fim do atendimento
+     * Método lista comandas gerenciadas
+     * @return comandas a serem gerenciadas
      */
-
     public static String listarComandas(LocalDate inicio, LocalDate fim) {
         String com = null;
         for (Comanda comanda : gerencia) {
@@ -54,11 +48,11 @@ public class Gerencia {
 
     /**
      *
-     * @param inicio
-     * @param fim
-     * @return
+     * @param inicio indica o início do atendimento
+     * @param fim indica o fim do atendimento
+     * Método retorna o lucro total das comandas
+     * @return lucro das comandas
      */
-
     public static float lucroTotal(LocalDate inicio, LocalDate fim){
         float lucro = 0f;
         for (Comanda comanda: gerencia) {

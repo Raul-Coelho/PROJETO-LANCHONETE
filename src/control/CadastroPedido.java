@@ -41,7 +41,6 @@ public class CadastroPedido {
      * Metodo percorre a lista de produtos e informa a posição do pedido
      * @return posição do produto
      */
-
     int isBuscar(int codProduto){
         if(produtos.isEmpty())
             return -1;
@@ -73,7 +72,6 @@ public class CadastroPedido {
      * Metodo Salva os produtos
      * @return produto adicionado
      */
-
     public boolean isSalvar(Produto produto){
         if(isBuscar(produto.getCodProduto()) >=0 ) {
             return false;
@@ -101,7 +99,6 @@ public class CadastroPedido {
      * Busca o produto para ser editado remove o antigo e cadastra o novo
      * @return o produto editado
      */
-
     public boolean isEdit(int codProduto){
         if (isBuscar(codProduto) < 0){
             return false;

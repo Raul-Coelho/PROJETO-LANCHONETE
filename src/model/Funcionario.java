@@ -25,7 +25,6 @@ public class Funcionario extends Pessoa {
      * @param senha atributo herdado da superclasse pessoa que indica a senha do usuário
      * @param telefone atributo herdado da superclasse pessoa que indica o numero do telefone  do usuário
      * @param tipo atributo herdado da superclasse pessoa que indica o tipo de setor do usuário
-     * @param
      */
 
     public Funcionario(String nome, String cpf, LocalDate nascimento, String email,String senha, String telefone, Setor tipo) {
@@ -36,6 +35,7 @@ public class Funcionario extends Pessoa {
 
     /**
      * Metodos get e set da classe <b>Funcionario</b>
+     * @return aponta e retorna os atributos da classse
      */
 
     public Setor getTipo() {
