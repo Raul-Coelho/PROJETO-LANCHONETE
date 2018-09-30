@@ -3,7 +3,10 @@ package control;
 import model.Comanda;
 import model.Cozinha;
 import model.Pedido;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A classe <b>GerenciaComanda</b>  contém métodos para a gerencia das comandas do domínio da aplicação
@@ -18,7 +21,7 @@ public class GerenciaComanda {
      * A classe inicializa uma estrutura ArrayList de Comanda para a gerencia das comandas
      */
 
-    private ArrayList<Comanda> comandas;
+    private List<Comanda> comandas;
 
     public GerenciaComanda() {
         comandas = new ArrayList<>();
@@ -42,7 +45,7 @@ public class GerenciaComanda {
      * Lista as comandas adicionadas
      * @return comandas
      */
-    public ArrayList<Comanda> VerComandas(){
+    public List<Comanda> VerComandas(){
         return comandas;
     }
 
@@ -54,8 +57,8 @@ public class GerenciaComanda {
      */
     public int BuscarMesas(int mesa){
         if (!comandas.isEmpty()){
-            for (int i =0 ;i<comandas.size();i++){
-                if (comandas.get(i).getMesas() == mesa){
+            for (int i = 0 ;i<comandas.size();i++){
+                if (comandas.get(i).getMesa() == mesa){
                     return i;
                 }
             }
@@ -99,8 +102,11 @@ public class GerenciaComanda {
         if (BuscarMesas(mesa) == -1){
             return false;
         }
-        for (Pedido pedidos: comandas.get(mesa).getPedidos()) {
-            if(pedidos.getStatus() == true){
+        if (comandas.get(BuscarMesas(mesa)).getData().isBefore(comandas.get(BuscarMesas(mesa)).getData().plusDays(2))){
+            return false;
+        }
+        for (Pedido pedido: comandas.get(BuscarMesas(mesa)).getPedidos()) {
+            if(pedido.getStatus() == true){
                 return false;
             }
         }
@@ -137,12 +143,27 @@ public class GerenciaComanda {
      */
     public boolean FecharPedido(GerenciaComanda gC,int idPedido, int mesa){
       if (gC.BuscarMesas(mesa) >= 0){
-          return comandas.get(BuscarMesas(mesa)).getPedidos().get(idPedido).setStatus(false);
+          return comandas.get(BuscarMesas(mesa)).getPedidos().get(buscarPedido(mesa,idPedido)).setStatus(false);
       }
       return false;
     }
 
+    public int buscarPedido(int mesa, int idPedido){
+        if (!comandas.isEmpty()){
+            for (int i = 0 ;i<comandas.size();i++){
+                if (comandas.get(i).getMesa() == mesa){
+                    Comanda comandaUnica = comandas.get(i);
+                    for(int j = 0; j<comandaUnica.getPedidos().size();j++){
+                        if (comandaUnica.getPedidos().get(j).getIdPedido() == idPedido){
+                            return j;
+                        }
+                    }
 
+                }
+            }
+        }
+        return -1;
+    }
 
 
 }

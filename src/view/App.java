@@ -26,13 +26,14 @@ public class App {
     public static void main(String[] args) {
 
 
-
         Scanner ler = new Scanner(System.in);
         Scanner parada = new Scanner(System.in);
         GerenciaUsuario cadastroUsuario = new GerenciaUsuario();
         GerenciaComanda gC = new GerenciaComanda();
         Cozinha cozinha = new Cozinha();
         GerenciaCardapio cP = new GerenciaCardapio();
+
+        cadastroUsuario.isSalvar(new Funcionario("Paulao","111-111-111-01",LocalDate.now(),"1","1","88",Funcionario.Setor.ATENDIMENTO));
 
         cP.Salvar(new Produto(1,"Hot Dog",5.00f,"Pao,Salsisha e Molho especial"));
         cP.Salvar(new Produto(2,"Coxinha",3.00f,"Frango desfiado com massa pronta"));
@@ -51,7 +52,7 @@ public class App {
                 System.out.print("1-Autenticar        2-Criar conta\n");
                 opcao = ler.nextInt();
                 if (opcao == 1) {
-                    System.out.println("EMAIL: ");
+                    System.out.print("EMAIL: ");
                     email = ler.next();
                     System.out.print("Senha: ");
                     senha = ler.next();

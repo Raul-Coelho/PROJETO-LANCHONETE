@@ -69,7 +69,7 @@ public class Cozinha {
      * @return o pedido
      */
     public String verPedido(){
-        String pedido = null;
+        String pedido = "";
         for (Pedido p: pedidos) {
             pedido+= "Mesa: "+p.getMesa()+" Pedido: "+p.getIdPedido()+p.toString();
         }

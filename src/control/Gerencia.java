@@ -37,9 +37,9 @@ public class Gerencia {
      * @return comandas a serem gerenciadas
      */
     public static String listarComandas(LocalDate inicio, LocalDate fim) {
-        String com = null;
+        String com = "";
         for (Comanda comanda : gerencia) {
-            if (comanda.getData().equals(inicio) && comanda.getData().equals(fim)) {
+            if (comanda.getData().isAfter(inicio.plusDays(-1)) && comanda.getData().isBefore(fim.plusDays(1))) {
                 com += comanda.toString();
             }
         }

@@ -45,11 +45,11 @@ public class Comanda {
         this.pedidos = pedidos;
     }
 
-    public int getMesas() {
+    public int getMesa() {
         return mesa;
     }
 
-    public void setMesas(int mesas) {
+    public void setMesa(int mesas) {
         this.mesa = mesas;
     }
 
@@ -76,7 +76,7 @@ public class Comanda {
                 "pedidos=" + pedidos +
                 ", aberto=" + aberto +
                 ", mesa=" + mesa +
-                '}';
+                "}\n";
     }
 
     /**
