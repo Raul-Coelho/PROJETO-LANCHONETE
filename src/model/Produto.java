@@ -1,12 +1,14 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  *A classe Produto modela a entidade <b>Produto </b> do domínio da aplicação
  * @author RaulRomulo
  * @since 1.0
  * @version 1.0
  */
-public class Produto {
+public class Produto{
 
     private int codProduto;
     private String nome;
