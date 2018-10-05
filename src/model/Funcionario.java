@@ -13,7 +13,6 @@ import java.time.LocalDate;
 public class Funcionario extends Pessoa {
     public enum Setor{ATENDIMENTO, COZINHA, CAIXA, GERENTE };
     private Setor tipo;
-    private String senha;
 
 
     /**
@@ -22,15 +21,13 @@ public class Funcionario extends Pessoa {
      * @param cpf atributo herdado da superclasse pessoa que indica o cpf do usuário
      * @param nascimento atributo herdado da superclasse pessoa que indica a date de nascimento do usuário
      * @param email atributo herdado da superclasse pessoa que indica o email do usuário
-     * @param senha atributo herdado da superclasse pessoa que indica a senha do usuário
      * @param telefone atributo herdado da superclasse pessoa que indica o numero do telefone  do usuário
      * @param tipo atributo herdado da superclasse pessoa que indica o tipo de setor do usuário
      */
 
-    public Funcionario(String nome, String cpf, LocalDate nascimento, String email,String senha, String telefone, Setor tipo) {
-        super(nome, cpf, nascimento, email, telefone);
+    public Funcionario(String nome, String cpf, LocalDate nascimento, String email, String senha, String telefone, Setor tipo) {
+        super(nome, cpf, nascimento, email, senha, telefone);
         this.tipo = tipo;
-        this.senha = senha;
     }
 
     /**
@@ -47,14 +44,6 @@ public class Funcionario extends Pessoa {
     }
 
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
     /**
      * Metodo toString que é uma representação textual da classe
      *
@@ -63,4 +52,5 @@ public class Funcionario extends Pessoa {
     public String toString() {
         return "Funcionario{" + getNome()+ ", Tipo =" + tipo + ", Email = "+ getEmail() + ", Telefone = "+ getTelefone() + '}';
     }
+
 }

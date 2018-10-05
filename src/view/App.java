@@ -6,6 +6,7 @@ import control.Gerencia;
 import control.GerenciaComanda;
 import model.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Locale;
@@ -23,7 +24,7 @@ public class App {
      *
      * @param args indica argumentos
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 
         Scanner ler = new Scanner(System.in);
@@ -40,9 +41,9 @@ public class App {
         cP.Salvar(new Produto(3,"Café",1.50f,"Bebida a base de cafeina"));
         cP.Salvar(new Produto(4,"Pastel",2.50f,"Pastes de Frango"));
 
-/**
- * menu principal da aplicação, onde vai ter interação com o usuário
- */
+        /**
+         * menu principal da aplicação, onde vai ter interação com o usuário
+         */
             int opcao = 1;
             int parar = 0;
             String email = null,senha = null;

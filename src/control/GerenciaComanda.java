@@ -4,6 +4,8 @@ import model.Comanda;
 import model.Cozinha;
 import model.Pedido;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +23,7 @@ public class GerenciaComanda {
      * A classe inicializa uma estrutura ArrayList de Comanda para a gerencia das comandas
      */
 
-    private List<Comanda> comandas;
-
-    public GerenciaComanda() {
-        comandas = new ArrayList<>();
-    }
+    private static ArrayList<Comanda> comandas = new ArrayList<>();
 
     /**
      *
@@ -33,7 +31,7 @@ public class GerenciaComanda {
      * Metodo adiciona uma nova comanda a uma mesa
      * @return comanda adicionada a uma mesa
      */
-    public boolean NovaComanda(int mesa){
+    public static boolean NovaComanda(int mesa){
         if (BuscarMesas(mesa) != -1){
             return false;
         }
@@ -55,7 +53,7 @@ public class GerenciaComanda {
      * Metodo percorre as mesas que estao sendo atendidas
      * @return numero da mesa
      */
-    public int BuscarMesas(int mesa){
+    public static int BuscarMesas(int mesa){
         if (!comandas.isEmpty()){
             for (int i = 0 ;i<comandas.size();i++){
                 if (comandas.get(i).getMesa() == mesa){
@@ -74,7 +72,7 @@ public class GerenciaComanda {
      * @return comanda com pedidos
      */
 
-    public boolean NovoPedido(int mesa, Pedido pedido, Cozinha cozinha){
+    public static boolean NovoPedido(int mesa, Pedido pedido, Cozinha cozinha){
         if (BuscarMesas(mesa) != -1){
             cozinha.addnaCozinha(pedido);
             return comandas.get(BuscarMesas(mesa)).AdcionarPedido(pedido);
@@ -88,7 +86,7 @@ public class GerenciaComanda {
      * Metodo mostra os pedidos na comanda
      * @return comanda com pedidos
      */
-    public String VerPedidos(int mesa){
+    public static String VerPedidos(int mesa){
         return comandas.toString();
     }
 
@@ -98,7 +96,7 @@ public class GerenciaComanda {
      * Método remove uma comanda atendida
      * @return comanda fechada
      */
-    public boolean FecharComanda(int mesa){
+    public static boolean FecharComanda(int mesa) throws IOException, ClassNotFoundException {
         if (BuscarMesas(mesa) == -1){
             return false;
         }
@@ -115,22 +113,13 @@ public class GerenciaComanda {
 
     /**
      *
-     * @param mesa indica uma mesa do estabelecimento
-     * @param pedido indica o pedido feito
-     * Método exclui um pedido de uma comanda
-     * @return pedido excluido
+     * @param mesa indica a mesa da comanda
+     * @return a mesa com todas suas informacoes
      */
-    public boolean ExcluirPedido(int mesa, Pedido pedido){
-        for (int i = 0; i < comandas.size(); i++) {
-            if (pedido.getStatus() == false){
-                if (BuscarMesas(mesa) > 0){
-                    if (pedido.getIdPedido() == i){
-                        return comandas.get(BuscarMesas(mesa)).getPedidos().remove(pedido);
-                    }
-                }
-            }
-        }
-        return false;
+    public static Comanda unicaComanda(int mesa){
+        if(BuscarMesas(mesa)!=-1)
+            return comandas.get(BuscarMesas(mesa));
+        return null;
     }
 
     /**
@@ -141,14 +130,14 @@ public class GerenciaComanda {
      * Método fecha um pedido
      * @return pedido fechado
      */
-    public boolean FecharPedido(GerenciaComanda gC,int idPedido, int mesa){
+    public static boolean FecharPedido(GerenciaComanda gC,int idPedido, int mesa){
       if (gC.BuscarMesas(mesa) >= 0){
           return comandas.get(BuscarMesas(mesa)).getPedidos().get(buscarPedido(mesa,idPedido)).setStatus(false);
       }
       return false;
     }
 
-    public int buscarPedido(int mesa, int idPedido){
+    public static int buscarPedido(int mesa, int idPedido){
         if (!comandas.isEmpty()){
             for (int i = 0 ;i<comandas.size();i++){
                 if (comandas.get(i).getMesa() == mesa){

@@ -1,9 +1,12 @@
 package control;
 
+import dao.DaoArrayListGenerrico;
 import model.Comanda;
+
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A classe <b>Gerencia</b> contém os métodos da classe para serem usados no domínio da aplicação
@@ -12,12 +15,10 @@ import java.util.List;
  * @version 1.0
  */
 
-public class Gerencia {
+public class Gerencia extends DaoArrayListGenerrico {
 
-    /**
-     * A classe inicializa uma estrutura lista com várias comandas para serem gerenciadas
-     */
-    private static List<Comanda> gerencia = new ArrayList<>();
+    private static File file = new File("Comanda");
+
 
     /**
      *
@@ -25,8 +26,11 @@ public class Gerencia {
      * Método adiciona comandas para serem gerenciadas
      * @return comanda a ser gerenciada
      */
-    public static boolean adicionarGerencia(Comanda com) {
-        return gerencia.add(com);
+    public static boolean adicionarGerencia(Comanda com) throws IOException, ClassNotFoundException {
+        ArrayList<Comanda> gerencia = getEstrutura(file);
+        gerencia.add(com);
+        push(gerencia,file);
+        return true;
     }
 
     /**
@@ -36,14 +40,16 @@ public class Gerencia {
      * Método lista comandas gerenciadas
      * @return comandas a serem gerenciadas
      */
-    public static String listarComandas(LocalDate inicio, LocalDate fim) {
+    public static ArrayList<Comanda> listarComandas(LocalDate inicio, LocalDate fim) throws IOException, ClassNotFoundException {
+        ArrayList<Comanda> gerencia = getEstrutura(file);
+        ArrayList<Comanda> comandas = new ArrayList<>();
         String com = "";
         for (Comanda comanda : gerencia) {
             if (comanda.getData().isAfter(inicio.plusDays(-1)) && comanda.getData().isBefore(fim.plusDays(1))) {
-                com += comanda.toString();
+                comandas.add(comanda);
             }
         }
-        return com;
+        return comandas;
     }
 
     /**
@@ -53,10 +59,11 @@ public class Gerencia {
      * Método retorna o lucro total das comandas
      * @return lucro das comandas
      */
-    public static float lucroTotal(LocalDate inicio, LocalDate fim){
+    public static float lucroTotal(LocalDate inicio, LocalDate fim) throws IOException, ClassNotFoundException {
+        ArrayList<Comanda> gerencia = getEstrutura(file);
         float lucro = 0f;
         for (Comanda comanda: gerencia) {
-            if (comanda.getData().equals(inicio) && comanda.getData().equals(fim)){
+            if (comanda.getData().isAfter(inicio.plusDays(-1)) && comanda.getData().isBefore(fim.plusDays(1))){
                 lucro+= comanda.valorTotal();
             }
         }

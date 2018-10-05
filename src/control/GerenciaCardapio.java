@@ -1,7 +1,11 @@
 package control;
 
+import dao.DaoArrayListGenerrico;
 import model.Produto;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static view.App.isCadastrarProduto;
@@ -14,16 +18,16 @@ import static view.App.isCadastrarProduto;
  * @version 1.0
  */
 
-public class GerenciaCardapio {
-    private ArrayList<Produto> produtos;
-    private Produto ProdutoTeste;
+public class GerenciaCardapio extends DaoArrayListGenerrico<Produto>{
+
+    private static File file = new File("Produto");
 
     /**
      * A classe inicializa uma estrutura arraylist com vários produtos
      */
 
-    public GerenciaCardapio() {
-        produtos = new ArrayList<>();
+    public GerenciaCardapio() throws IOException {
+
     }
 
     /**
@@ -31,7 +35,11 @@ public class GerenciaCardapio {
      * @return produtos
      */
 
-    public ArrayList<Produto> listar(){
+    public static ArrayList<Produto> listar() throws IOException, ClassNotFoundException {
+        ArrayList<Produto> produtos = getEstrutura(file);
+        if (produtos.isEmpty()){
+            return null;
+        }
         return produtos;
     }
 
@@ -41,7 +49,8 @@ public class GerenciaCardapio {
      * Metodo percorre a lista de produtos e informa a posição do pedido
      * @return posição do produto
      */
-    int Buscar(int codProduto){
+    static int Buscar(int codProduto) throws IOException, ClassNotFoundException {
+        ArrayList<Produto> produtos = getEstrutura(file);
         if(produtos.isEmpty())
             return -1;
         for(int i = 0; i<produtos.size();i++) {
@@ -58,7 +67,8 @@ public class GerenciaCardapio {
      * @return um produto escolhido ou null
      */
 
-    public Produto retornaProduto(int codigo) {
+    public static Produto retornaProduto(int codigo) throws IOException, ClassNotFoundException {
+        ArrayList<Produto> produtos = getEstrutura(file);
         for(Produto p: produtos) {
             if(p.getCodProduto() == codigo)
                 return p;
@@ -72,11 +82,14 @@ public class GerenciaCardapio {
      * Metodo Salva os produtos
      * @return produto adicionado
      */
-    public boolean Salvar(Produto produto){
+    public static boolean Salvar(Produto produto) throws IOException, ClassNotFoundException {
+        ArrayList<Produto> produtos = getEstrutura(file);
         if(Buscar(produto.getCodProduto()) >=0 ) {
             return false;
         }
-        return produtos.add(produto);
+        produtos.add(produto);
+        push(produtos,file);
+        return true;
     }
 
     /**
@@ -86,11 +99,14 @@ public class GerenciaCardapio {
      * @return o produto removido
      */
 
-    public boolean isRemover(int codProduto){
+    public static boolean isRemover(int codProduto) throws IOException, ClassNotFoundException {
+        ArrayList<Produto> produtos = getEstrutura(file);
         if (Buscar(codProduto) < 0){
-            System.out.println("Produto Inexistente");
+            return false;
         }
-        return produtos.remove(retornaProduto(codProduto));
+        produtos.remove(Buscar(codProduto));
+        push(produtos,file);
+        return true;
     }
 
     /**
@@ -99,7 +115,7 @@ public class GerenciaCardapio {
      * Busca o produto para ser editado remove o antigo e cadastra o novo
      * @return o produto editado
      */
-    public boolean isEdit(int codProduto){
+    public static boolean isEdit(int codProduto) throws IOException, ClassNotFoundException {
         if (Buscar(codProduto) < 0){
             return false;
         }

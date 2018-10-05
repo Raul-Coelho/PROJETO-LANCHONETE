@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @since 1.0
  * @version 1.0
  */
-public class Produto{
+public class Produto implements Serializable{
 
     private int codProduto;
     private String nome;

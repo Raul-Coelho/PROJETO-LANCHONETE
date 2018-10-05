@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  * @version 1.0
  */
 
-public class Comanda {
+public class Comanda implements Serializable {
 
     private List<Pedido> pedidos;
     private boolean aberto;

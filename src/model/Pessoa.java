@@ -1,7 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * A classe <b>Pessoa</b> modela a entidade <b>Pessoa</b> do domínio da aplicação
@@ -10,7 +12,7 @@ import java.util.Date;
  * @since 1.0
  * @version 1.0
  */
-public class Pessoa {
+public class Pessoa implements Serializable {
 
 
 
@@ -18,7 +20,9 @@ public class Pessoa {
     private String cpf;
     private LocalDate nascimento;
     private String email;
+    private String senha;
     private String telefone;
+
 
     /**
      *Atributos da entidade generalizada <b>Pessoa</b>
@@ -28,11 +32,12 @@ public class Pessoa {
      * @param email indica o email do usuário
      * @param telefone indica o numero do telefone do usuário
      */
-    public Pessoa(String nome, String cpf, LocalDate nascimento, String email, String telefone ) {
+    public Pessoa(String nome, String cpf, LocalDate nascimento, String email,String senha, String telefone ) {
         this.nome = nome;
         this.cpf = cpf;
         this.nascimento = nascimento;
         this.email = email;
+        this.senha = senha;
         this.telefone = telefone;
     }
 
@@ -72,6 +77,14 @@ public class Pessoa {
         this.email = email;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
     public String getTelefone(){
         return telefone;
     }
@@ -91,6 +104,24 @@ public class Pessoa {
                 ", email='" + email + '\'' +
                 ", telefone=" + telefone +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pessoa pessoa = (Pessoa) o;
+        return Objects.equals(email, pessoa.email);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(email);
+    }
+
+    public boolean autenticar(String login, String senha){
+        return login.equals(this.email) && senha.equals(this.senha);
     }
 }
 

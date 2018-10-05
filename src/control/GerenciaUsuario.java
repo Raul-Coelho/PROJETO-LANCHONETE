@@ -1,7 +1,10 @@
 package control;
+import dao.DaoHashMapGenerico;
 import model.Funcionario;
 
-import java.time.LocalDate;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -12,11 +15,13 @@ import java.util.*;
  * @version 1.0
  */
 
-public class GerenciaUsuario {
+public class GerenciaUsuario extends DaoHashMapGenerico<Funcionario> {
+
+    public static File file = new File("Usuario");
     /**
      * A classe inicializa uma estrutura HashMap de funcionario com vários usuários
      */
-    private Map<String, Funcionario> usuarios;
+    private static Map<String, Funcionario> usuarios;
     private Funcionario loginMaster;
 
     /**
@@ -32,9 +37,11 @@ public class GerenciaUsuario {
      * Metodo usado para cadastrar um novo usuário
      * @return se tem ou não um funcionário salvo com o mesmo email
      */
-    public boolean isSalvar(Funcionario usuario) {
+    public static boolean isSalvar(Funcionario usuario) throws IOException, ClassNotFoundException {
+        HashMap<String, Funcionario> usuarios = getEstrutura(file);
         if(Buscar(usuario.getEmail())== null) {
             usuarios.put(usuario.getEmail(), usuario);
+            push(usuarios,file);
             return true;
         }
         return false;
@@ -47,7 +54,7 @@ public class GerenciaUsuario {
      * Metodo para autenticar o usuário para acessar o sistema
      * @return se tem ou não o usuário cadastrado
      */
-    public boolean Autenticar(String email, String senha){
+    public static boolean Autenticar(String email, String senha) throws IOException, ClassNotFoundException, FileNotFoundException {
         Funcionario func = Buscar(email);
         if (func != null){
             if (func.getSenha().equals(senha)){
@@ -63,10 +70,13 @@ public class GerenciaUsuario {
      * Metodo busca e remove um funcionario cadastrado
      * @return remove o usuário se estiver cadastrado no sistema
      */
-    public boolean Remove(String email){
+    public static boolean Remove(String email) throws IOException, ClassNotFoundException {
+        HashMap<String, Funcionario> usuarios = getEstrutura(file);
         Funcionario func = Buscar(email);
         if (func!=null){
-                return usuarios.remove(email,func);
+                usuarios.remove(email,func);
+                push(usuarios,file);
+                return true;
         }
         return false;
     }
@@ -78,7 +88,7 @@ public class GerenciaUsuario {
      * Metodo edita dados do usuário
      * @return o usuário salvo se ele estiver cadastrado
      */
-    public boolean Editar(String email, Funcionario usuario){
+    public boolean Editar(String email, Funcionario usuario) throws IOException, ClassNotFoundException {
         if (Buscar(email)!= null){
             Remove(email);
             return isSalvar(usuario);
@@ -100,7 +110,8 @@ public class GerenciaUsuario {
      * Método busca usuários cadastrados
      * @return usuários cadastrados
      */
-    public Funcionario Buscar(String email) {
+    public static Funcionario Buscar(String email) throws IOException, ClassNotFoundException {
+        HashMap<String, Funcionario> usuarios = getEstrutura(file);
         if(usuarios.isEmpty()) {
             return null;
         }
