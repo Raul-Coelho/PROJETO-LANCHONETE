@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import static view.App.isCadastrarProduto;
 
 /**
  * A classe <b>GerenciaCardapio</b> contém os métodos da classe para serem usados no domínio da aplicação.
@@ -38,7 +37,7 @@ public class GerenciaCardapio extends DaoArrayListGenerrico<Produto>{
     public static ArrayList<Produto> listar() throws IOException, ClassNotFoundException {
         ArrayList<Produto> produtos = getEstrutura(file);
         if (produtos.isEmpty()){
-            return null;
+            return new ArrayList<>();
         }
         return produtos;
     }
@@ -115,11 +114,11 @@ public class GerenciaCardapio extends DaoArrayListGenerrico<Produto>{
      * Busca o produto para ser editado remove o antigo e cadastra o novo
      * @return o produto editado
      */
-    public static boolean isEdit(int codProduto) throws IOException, ClassNotFoundException {
-        if (Buscar(codProduto) < 0){
-            return false;
-        }
-        isRemover(Buscar(codProduto));
-        return Salvar(isCadastrarProduto());
-    }
+//    public static boolean isEdit(int codProduto) throws IOException, ClassNotFoundException {
+//        if (Buscar(codProduto) < 0){
+//            return false;
+//        }
+//        isRemover(Buscar(codProduto));
+//        return Salvar(isCadastrarProduto());
+//    }
 }

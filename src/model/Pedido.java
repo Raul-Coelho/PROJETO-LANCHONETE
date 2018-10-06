@@ -25,22 +25,16 @@ public class Pedido {
      * Atributos da classe <b>Pedido</b>
      * @param produto indica o atributo produto para o pedido
      * @param quantidade indica a quantidade de produtos
-     * @param subtotal indica o subtotal do valor do pedido
-     * @param horaPedido indica a hora em que o pedido foi recebido
-     * @param dataPedido indica a data em que o pedido foi recebido
-     * O status indica o status do pedido, sendo aberto ou fechado
-     * O idpedido indica o numero do pedido
-     * A mesa indica a mesa onde sera atendido o pedido
      */
 
-    public Pedido(Produto produto, int quantidade, float subtotal, LocalTime horaPedido, LocalDate dataPedido) {
+    public Pedido(int quantidade,Produto produto) {
         this.produto = produto;
         idPedido = ++id;
         this.quantidade = quantidade;
         this.subtotal = subtotal;
-        status = true;
-        this.horaPedido = horaPedido;
-        this.dataPedido = dataPedido;
+        status = false;
+        horaPedido = LocalTime.now();
+        dataPedido = LocalDate.now();
     }
 
     /**
@@ -72,8 +66,11 @@ public class Pedido {
         this.idPedido = idPedido;
     }
 
-    public boolean getStatus() {
+    public boolean Status() {
         return status;
+    }
+    public void mudarStatus(){
+        status = true;
     }
 
     public boolean setStatus(boolean status) {
@@ -127,16 +124,8 @@ public class Pedido {
      */
     @Override
     public String toString() {
-        return "Pedido{" +
-                "produto=" + produto +
-                ", idPedido=" + idPedido +
-                ", quantidade=" + quantidade +
-                ", subtotal=" + subtotal +
-                ", mesa=" + mesa +
-                ", status=" + status +
-                ", horaPedido=" + horaPedido +
-                ", dataPedido=" + dataPedido +
-                '}';
+        String s = Status()? "Atendido":"Ñ atendido";
+        return quantidade+" - "+produto.getNome()+" - Subtotal: "+getSubtotal()+" -- n°:"+getIdPedido()+" ==> "+s+"\n";
     }
 }
 

@@ -48,7 +48,7 @@ public class TelaInicial extends JFrame {
 
                 try {
                     if (GerenciaUsuario.Autenticar(email, senha)) {
-                        usuario = GerenciaUsuario.Buscar(email);
+                        usuario = GerenciaUsuario.buscarUsuario(textField1.getText());
                         TelaPrincipal principal = new TelaPrincipal();
                         principal.pack();
                         dispose();
@@ -84,6 +84,7 @@ public class TelaInicial extends JFrame {
 
     }
 
+
     private void createUIComponents() {
         LogoInicial = new JLabel();
         ImageIcon icon = new ImageIcon("images/logo.png");
@@ -112,4 +113,11 @@ public class TelaInicial extends JFrame {
             // handle exception
         }
     }
+    public static Funcionario retornaUsuario(){
+        return usuario;
+    }
+    public static void setarUsuario(Funcionario func){
+        usuario = func;
+    }
+
 }

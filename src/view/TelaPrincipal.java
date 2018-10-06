@@ -13,9 +13,9 @@ public class TelaPrincipal extends JDialog {
     private JPanel contentPane;
     private JButton CARDAPIOButton;
     private JButton MESAButton;
-    private JButton button3;
+    private JButton MINHACONTAButton;
     private JButton button4;
-    private JButton button5;
+    private JButton sairButton;
     private JButton button6;
     private JLabel Logo2Img;
     private JButton buttonOK;
@@ -33,6 +33,7 @@ public class TelaPrincipal extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 TelaCardapio cardapio = new TelaCardapio();
                 cardapio.pack();
+                dispose();
                 cardapio.setVisible(true);
             }
         });
@@ -41,7 +42,26 @@ public class TelaPrincipal extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 TelaMesas mesas = new TelaMesas();
                 mesas.pack();
+                dispose();
                 mesas.setVisible(true);
+            }
+        });
+        MINHACONTAButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TelaEditarUsuario editar = new TelaEditarUsuario();
+                editar.pack();
+                dispose();
+                editar.setVisible(true);
+            }
+        });
+        sairButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TelaInicial inicial = new TelaInicial();
+                inicial.pack();
+                dispose();
+                inicial.setVisible(true);
             }
         });
     }

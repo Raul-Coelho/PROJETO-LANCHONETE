@@ -72,10 +72,11 @@ public class GerenciaComanda {
      * @return comanda com pedidos
      */
 
-    public static boolean NovoPedido(int mesa, Pedido pedido, Cozinha cozinha){
-        if (BuscarMesas(mesa) != -1){
-            cozinha.addnaCozinha(pedido);
-            return comandas.get(BuscarMesas(mesa)).AdcionarPedido(pedido);
+    public static boolean NovoPedido(int mesa, Pedido pedido){
+        if (BuscarMesas(mesa) != -1 && pedido.getProduto() != null){
+            Cozinha.addnaCozinha(pedido);
+            comandas.get(BuscarMesas(mesa)).AdcionarPedido(pedido);
+            return true;
         }
         return false;
     }
@@ -104,7 +105,7 @@ public class GerenciaComanda {
             return false;
         }
         for (Pedido pedido: comandas.get(BuscarMesas(mesa)).getPedidos()) {
-            if(pedido.getStatus() == true){
+            if(pedido.Status() == true){
                 return false;
             }
         }
@@ -154,5 +155,33 @@ public class GerenciaComanda {
         return -1;
     }
 
+    public static boolean deletepedido(int mesa,int numpedido){
+        if (numeroValido(mesa,numpedido)){
+            if (!(comandas.get(BuscarMesas(mesa)).getPedidos().get(buscarPedido(mesa,numpedido)).Status())){
+                Cozinha.remover(numpedido);
+                return comandas.get(BuscarMesas(mesa)).removePedido(numpedido);
+            }
+        }
+        return false;
+    }
+
+    public static boolean numeroValido(int mesa, int numPedido){
+        if (BuscarMesas(mesa)!= -1){
+            return comandas.get(BuscarMesas(mesa)).buscarPedido(numPedido)!= -1;
+        }
+        return false;
+    }
+
+    public static boolean editarPedido(int mesa, Pedido pedido, int numpedido){
+        if (numeroValido(mesa,numpedido)){
+            if (!(comandas.get(BuscarMesas(mesa)).getPedidos().get(buscarPedido(mesa,numpedido)).Status())){
+                pedido.setIdPedido(numpedido);
+                deletepedido(mesa, numpedido);
+                return NovoPedido(mesa,pedido);
+
+            }
+        }
+        return false;
+    }
 
 }

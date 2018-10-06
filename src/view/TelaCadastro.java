@@ -26,6 +26,7 @@ public class TelaCadastro extends JDialog {
     private JTextField textField3;
     private JTextField textField4;
     private JFormattedTextField formattedTextField2;
+    private JFormattedTextField formattedTextField3;
 
     private GerenciaUsuario gU;
 
@@ -55,7 +56,7 @@ public class TelaCadastro extends JDialog {
 
                 String email = textField3.getText();
                 String senha = new String(passwordField1.getPassword());
-                String telefone = textField4.getText();
+                String telefone = formattedTextField3.getText();
                 Funcionario.Setor setor = (Funcionario.Setor) comboBox1.getSelectedItem();
 
                 Funcionario usuario = new Funcionario(nome, cpf, nascimento, email, senha, telefone, setor);
@@ -81,9 +82,11 @@ public class TelaCadastro extends JDialog {
     private void createUIComponents() {
         MaskFormatter formatter = null;
         MaskFormatter formatterCpf = null;
+        MaskFormatter formatterTelefone = null;
         try {
             formatter = new MaskFormatter("##/##/####");
-            formatterCpf = new MaskFormatter("###-###-###-##");
+            formatterCpf = new MaskFormatter("###.###.###-##");
+            formatterTelefone = new MaskFormatter("(##)#####-####");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -96,6 +99,11 @@ public class TelaCadastro extends JDialog {
         formattedTextField2 = new JFormattedTextField();
         if (formatterCpf!=null){
             formatterCpf.install(formattedTextField2);
+        }
+
+        formattedTextField3 = new JFormattedTextField();
+        if (formatterTelefone!=null){
+            formatterTelefone.install(formattedTextField3);
         }
 
         comboBox1 = new JComboBox(Funcionario.Setor.values());

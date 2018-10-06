@@ -118,4 +118,20 @@ public class GerenciaUsuario extends DaoHashMapGenerico<Funcionario> {
         return usuarios.get(email);
     }
 
+    /**
+     *
+     * @param email
+     * @return um usuario da lista uscado pelo email
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public static Funcionario buscarUsuario(String email) throws IOException, ClassNotFoundException {
+        HashMap<String, Funcionario> usuarios = getEstrutura(file);
+        Funcionario usuario = usuarios.get(email);
+        if (usuarios.isEmpty() || usuario == null){
+            return null;
+        }
+        return usuario;
+    }
+
 }
