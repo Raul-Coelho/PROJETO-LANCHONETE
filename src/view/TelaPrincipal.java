@@ -25,7 +25,7 @@ public class TelaPrincipal extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
         setTitle("Menu Principal");
-        setBounds(450,200,400,400);
+        setSize(450,520);
         setIconImage(new ImageIcon("images/menuicon.png").getImage());
         setBackground(Color.WHITE);
         CARDAPIOButton.addActionListener(new ActionListener() {
@@ -68,7 +68,7 @@ public class TelaPrincipal extends JDialog {
 
     private void createUIComponents() {
         Logo2Img = new JLabel();
-        ImageIcon icon =  new ImageIcon("images/logo2.jpg");
+        ImageIcon icon =  new ImageIcon("images/logo2.png");
         Logo2Img.setIcon(icon);
     }
 }

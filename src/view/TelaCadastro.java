@@ -14,6 +14,8 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TelaCadastro extends JDialog {
     private JPanel contentPane;
@@ -27,6 +29,8 @@ public class TelaCadastro extends JDialog {
     private JTextField textField4;
     private JFormattedTextField formattedTextField2;
     private JFormattedTextField formattedTextField3;
+    private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN, Pattern.CASE_INSENSITIVE);
 
     private GerenciaUsuario gU;
 
@@ -51,29 +55,34 @@ public class TelaCadastro extends JDialog {
                 DateTimeFormatter formatter = DateTimeFormatter
                         .ofPattern("dd/MM/yyyy");
 
-                LocalDate nascimento = LocalDate
-                        .parse(formattedTextField1.getText(), formatter);
+                LocalDate nascimento = LocalDate.parse(formattedTextField1.getText(), formatter);
 
-                String email = textField3.getText();
-                String senha = new String(passwordField1.getPassword());
-                String telefone = formattedTextField3.getText();
-                Funcionario.Setor setor = (Funcionario.Setor) comboBox1.getSelectedItem();
+                String email;
+                if (validarEmail(textField3.getText())){
+                    email = textField3.getText();
+                    String senha = new String(passwordField1.getPassword());
+                    String telefone = formattedTextField3.getText();
+                    Funcionario.Setor setor = (Funcionario.Setor) comboBox1.getSelectedItem();
 
-                Funcionario usuario = new Funcionario(nome, cpf, nascimento, email, senha, telefone, setor);
+                    Funcionario usuario = new Funcionario(nome, cpf, nascimento, email, senha, telefone, setor);
 
-                try {
-                    if (gU.isSalvar(usuario)) {
-                        JOptionPane.showMessageDialog(null, "Salvo !");
-                    } else {
-                        JOptionPane.showMessageDialog(null,
-                                "Já existe um usuário com esse login",
-                                "Mensagem de Erro",
-                                JOptionPane.ERROR_MESSAGE);
+                    try {
+                        if (gU.isSalvar(usuario)) {
+                            JOptionPane.showMessageDialog(null, "Salvo !");
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "Já existe um usuário com esse login",
+                                    "Mensagem de Erro",
+                                    JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (ClassNotFoundException e1) {
+                        e1.printStackTrace();
                     }
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                } catch (ClassNotFoundException e1) {
-                    e1.printStackTrace();
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,"Infome um Email Valido!", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -107,5 +116,10 @@ public class TelaCadastro extends JDialog {
         }
 
         comboBox1 = new JComboBox(Funcionario.Setor.values());
+    }
+
+    public static boolean validarEmail(String email){
+        Matcher matcher  = pattern.matcher(email);
+        return matcher.matches();
     }
 }

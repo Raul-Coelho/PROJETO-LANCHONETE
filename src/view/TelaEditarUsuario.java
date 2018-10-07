@@ -5,6 +5,7 @@ import model.Funcionario;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -26,6 +27,11 @@ public class TelaEditarUsuario extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
+        setTitle("Minha Conta");
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setLocation(500,200);
+        setIconImage(new ImageIcon("images/cadastroicon.png").getImage());
+        setBackground(Color.WHITE);
         voltarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -38,9 +44,6 @@ public class TelaEditarUsuario extends JDialog {
     }
 
     private void createUIComponents() throws ParseException {
-        MaskFormatter formattercpf = null;
-        MaskFormatter formatterNascimento = null;
-        MaskFormatter formatterTelefone = null;
 
         textField1 = new JTextField();
         textField2 = new JTextField();
@@ -53,40 +56,26 @@ public class TelaEditarUsuario extends JDialog {
         textField2.setText(TelaInicial.retornaUsuario().getEmail());
         passwordField1.setText(TelaInicial.retornaUsuario().getSenha());
 
-        formattercpf = new MaskFormatter("###.###.###-##");
+        formattedCpf = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
         formattedCpf.setText(TelaInicial.retornaUsuario().getCpf());
 
-        formatterNascimento = new MaskFormatter("##/##/####");
-        formattedNascimento.setText(String.valueOf(TelaInicial.retornaUsuario().getNascimento()));
+        formattedNascimento = new JFormattedTextField(new MaskFormatter("##/##/####"));
+        String[] data = TelaInicial.retornaUsuario().getNascimento().toString().split("-");
+        formattedNascimento.setText(data[2]+data[1]+data[0]);
 
-        formatterTelefone = new MaskFormatter("(##)#####-####");
+        formattedTelefone = new JFormattedTextField(new MaskFormatter("(##)#####-####"));
         formattedTelefone.setText(TelaInicial.retornaUsuario().getTelefone());
-
-        formattedCpf = new JFormattedTextField();
-        if(formattedCpf!= null){
-            formattercpf.install(formattedCpf);
-        }
-
-        formattedNascimento = new JFormattedTextField();
-        if (formattedNascimento!=null){
-            formatterNascimento.install(formattedNascimento);
-        }
-
-        formattedTelefone = new JFormattedTextField();
-        if (formatterTelefone!=null){
-            formatterTelefone.install(formattedTelefone);
-        }
-
 
         String[] array = {"ATENDIMENTO","COZINHA","CAIXA","GERENTE"};
         comboBox1 = new JComboBox(array);
         int setor;
         for(setor =0;setor<array.length;setor++){
-            if (array[setor].equals(TelaInicial.retornaUsuario().getTipo())){
+            if (array[setor].equals(String.valueOf(TelaInicial.retornaUsuario().getTipo()) )){
+                comboBox1.setSelectedIndex(setor);
                 break;
             }
         }
-        comboBox1.setSelectedItem(setor);
+
 
 
     }

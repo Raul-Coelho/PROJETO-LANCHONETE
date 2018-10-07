@@ -30,11 +30,10 @@ public class TelaInicial extends JFrame {
     public TelaInicial() {
 
         setContentPane(contentPane);
-        setBounds(100, 100, 450, 300);
-        setLocation(500,150);
+        setLocation(400,80);
         setTitle("Bem Vindo !");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(450,400);
+        setSize(450,520);
         setLocationRelativeTo(null);
         setIconImage(new ImageIcon("images/icon1.jpg").getImage());
         setBackground(Color.WHITE);
