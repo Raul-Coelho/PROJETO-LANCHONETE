@@ -88,7 +88,7 @@ public class GerenciaUsuario extends DaoHashMapGenerico<Funcionario> {
      * Metodo edita dados do usuário
      * @return o usuário salvo se ele estiver cadastrado
      */
-    public boolean Editar(String email, Funcionario usuario) throws IOException, ClassNotFoundException {
+    public static boolean Editar(String email, Funcionario usuario) throws IOException, ClassNotFoundException {
         if (Buscar(email)!= null){
             Remove(email);
             return isSalvar(usuario);

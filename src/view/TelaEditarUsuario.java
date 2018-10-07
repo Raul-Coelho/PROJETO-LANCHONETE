@@ -8,7 +8,10 @@ import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class TelaEditarUsuario extends JDialog {
     private JPanel contentPane;
@@ -22,6 +25,7 @@ public class TelaEditarUsuario extends JDialog {
     private JButton editarButton;
     private JButton voltarButton;
     private JButton buttonOK;
+    private LocalDate nascimento;
 
     public TelaEditarUsuario() {
         setContentPane(contentPane);
@@ -39,6 +43,23 @@ public class TelaEditarUsuario extends JDialog {
                 principal.pack();
                 dispose();
                 principal.setVisible(true);
+            }
+        });
+        editarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Funcionario usuario = new Funcionario(textField1.getText(),formattedCpf.getText(),nascimento,textField2.getText(), new String(passwordField1.getPassword()),formattedTelefone.getText(), Funcionario.Setor.valueOf((String) comboBox1.getSelectedItem()));
+                    GerenciaUsuario.Editar(TelaInicial.retornaUsuario().getEmail(),usuario);
+                    TelaInicial.setarUsuario(usuario);
+
+                    TelaPrincipal principal = new TelaPrincipal();
+                    principal.pack();
+                    dispose();
+                    principal.setVisible(true);
+                }catch(ClassNotFoundException | IOException ex) {
+                    JOptionPane.showMessageDialog(null, "Falha ao acessar arquivo", "Falha", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }
@@ -62,6 +83,8 @@ public class TelaEditarUsuario extends JDialog {
         formattedNascimento = new JFormattedTextField(new MaskFormatter("##/##/####"));
         String[] data = TelaInicial.retornaUsuario().getNascimento().toString().split("-");
         formattedNascimento.setText(data[2]+data[1]+data[0]);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        nascimento = LocalDate.parse(formattedNascimento.getText(), formatter);
 
         formattedTelefone = new JFormattedTextField(new MaskFormatter("(##)#####-####"));
         formattedTelefone.setText(TelaInicial.retornaUsuario().getTelefone());

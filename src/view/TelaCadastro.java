@@ -52,9 +52,8 @@ public class TelaCadastro extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 String nome = textField1.getText();
                 String cpf = formattedTextField2.getText();
-                DateTimeFormatter formatter = DateTimeFormatter
-                        .ofPattern("dd/MM/yyyy");
 
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDate nascimento = LocalDate.parse(formattedTextField1.getText(), formatter);
 
                 String email;
