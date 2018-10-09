@@ -40,12 +40,12 @@
               <text value="MINHA CONTA"/>
             </properties>
           </component>
-          <component id="6ab22" class="javax.swing.JButton" binding="button4" default-binding="true">
+          <component id="6ab22" class="javax.swing.JButton" binding="COZINHAButton" default-binding="true">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="COZINHA"/>
             </properties>
           </component>
           <component id="1c90c" class="javax.swing.JButton" binding="sairButton" default-binding="true">
@@ -53,15 +53,15 @@
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Sair"/>
+              <text value="SAIR"/>
             </properties>
           </component>
-          <component id="62993" class="javax.swing.JButton" binding="button6" default-binding="true">
+          <component id="62993" class="javax.swing.JButton" binding="GERENCIAButton" default-binding="true">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="GERENCIA"/>
             </properties>
           </component>
           <component id="1e982" class="javax.swing.JLabel" binding="Logo2Img" custom-create="true">

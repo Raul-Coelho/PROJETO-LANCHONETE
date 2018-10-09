@@ -2,6 +2,7 @@ package model;
 
 import control.GerenciaComanda;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,8 @@ import java.util.List;
  * @since 1.0
  * @version 1.0
  */
-public class Cozinha {
+public class Cozinha implements Serializable {
+
     private static List<Pedido> pedidos = new ArrayList<>();
     /**
      *
@@ -25,16 +27,14 @@ public class Cozinha {
     /**
      *
      * @param idPedido indica o id do pedido
-     * @param gC referência da classe GerenciaCOmanda
-     * Usa como referência o idPedido e GerenciaComanda e o metodo adiciona o pedido a uma mesa.
      * @return o Pedido
      */
-    public static boolean AtenderPedido(int idPedido, GerenciaComanda gC) {
+    public static boolean AtenderPedido(int idPedido) {
         if (buscar(idPedido) == -1){
             return false;
         }
         int mesa = pedidos.get(buscar(idPedido)).getMesa();
-        gC.FecharPedido(gC,idPedido,mesa);
+        GerenciaComanda.unicaComanda(mesa).getPedidos().get(GerenciaComanda.buscarPedido(mesa,idPedido)).mudarIsAberto();
         return pedidos.remove(pedidos.get(buscar(idPedido)));
     }
 
@@ -67,8 +67,21 @@ public class Cozinha {
         return pedido;
     }
 
+    /**
+     *
+     * @param numpedido
+     * @return a remoção do pedido da cozinha mudando o status para false
+     */
     public static boolean remover(int numpedido){
         return pedidos.remove(pedidos.get(buscar(numpedido)));
+    }
+
+    /**
+     *
+     * @return A lista de pedidos
+     */
+    public static List<Pedido> list(){
+        return pedidos;
     }
 
 }

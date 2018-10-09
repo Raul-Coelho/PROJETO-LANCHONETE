@@ -4,9 +4,7 @@ import model.Comanda;
 import model.Cozinha;
 import model.Pedido;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,14 +99,15 @@ public class GerenciaComanda {
         if (BuscarMesas(mesa) == -1){
             return false;
         }
-        if (comandas.get(BuscarMesas(mesa)).getData().isBefore(comandas.get(BuscarMesas(mesa)).getData().plusDays(2))){
+        if (!comandas.get(BuscarMesas(mesa)).getData().isBefore(comandas.get(BuscarMesas(mesa)).getData().plusDays(2))){
             return false;
         }
         for (Pedido pedido: comandas.get(BuscarMesas(mesa)).getPedidos()) {
-            if(pedido.Status() == true){
+            if(pedido.isAberto() == true){
                 return false;
             }
         }
+        comandas.get(BuscarMesas(mesa)).setStatus(false);
         return Gerencia.adicionarGerencia(comandas.remove(BuscarMesas(mesa)));
     }
 
@@ -133,11 +132,17 @@ public class GerenciaComanda {
      */
     public static boolean FecharPedido(GerenciaComanda gC,int idPedido, int mesa){
       if (gC.BuscarMesas(mesa) >= 0){
-          return comandas.get(BuscarMesas(mesa)).getPedidos().get(buscarPedido(mesa,idPedido)).setStatus(false);
+          return comandas.get(BuscarMesas(mesa)).getPedidos().get(buscarPedido(mesa,idPedido)).mudarIsAberto();
       }
       return false;
     }
 
+    /**
+     *
+     * @param mesa
+     * @param idPedido
+     * @return indice do pedido no arrey de comandas
+     */
     public static int buscarPedido(int mesa, int idPedido){
         if (!comandas.isEmpty()){
             for (int i = 0 ;i<comandas.size();i++){
@@ -157,7 +162,7 @@ public class GerenciaComanda {
 
     public static boolean deletepedido(int mesa,int numpedido){
         if (numeroValido(mesa,numpedido)){
-            if (!(comandas.get(BuscarMesas(mesa)).getPedidos().get(buscarPedido(mesa,numpedido)).Status())){
+            if (!(comandas.get(BuscarMesas(mesa)).getPedidos().get(buscarPedido(mesa,numpedido)).isAberto()== false)){
                 Cozinha.remover(numpedido);
                 return comandas.get(BuscarMesas(mesa)).removePedido(numpedido);
             }
@@ -174,7 +179,7 @@ public class GerenciaComanda {
 
     public static boolean editarPedido(int mesa, Pedido pedido, int numpedido){
         if (numeroValido(mesa,numpedido)){
-            if (!(comandas.get(BuscarMesas(mesa)).getPedidos().get(buscarPedido(mesa,numpedido)).Status())){
+            if (!(comandas.get(BuscarMesas(mesa)).getPedidos().get(buscarPedido(mesa,numpedido)).isAberto() == false)){
                 pedido.setIdPedido(numpedido);
                 deletepedido(mesa, numpedido);
                 return NovoPedido(mesa,pedido);

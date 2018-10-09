@@ -8,15 +8,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.text.ParseException;
 
 public class TelaPrincipal extends JDialog {
     private JPanel contentPane;
     private JButton CARDAPIOButton;
     private JButton MESAButton;
     private JButton MINHACONTAButton;
-    private JButton button4;
+    private JButton COZINHAButton;
     private JButton sairButton;
-    private JButton button6;
+    private JButton GERENCIAButton;
     private JLabel Logo2Img;
     private JButton buttonOK;
 
@@ -24,6 +25,7 @@ public class TelaPrincipal extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setTitle("Menu Principal");
         setSize(450,520);
         setLocation(450,100);
@@ -63,6 +65,28 @@ public class TelaPrincipal extends JDialog {
                 inicial.pack();
                 dispose();
                 inicial.setVisible(true);
+            }
+        });
+        COZINHAButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TelaCozinha cozinha = new TelaCozinha();
+                cozinha.pack();
+                dispose();
+                cozinha.setVisible(true);
+            }
+        });
+        GERENCIAButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    TelaGerencia gerencia = new TelaGerencia();
+                    gerencia.pack();
+                    dispose();
+                    gerencia.setVisible(true);
+                }catch (ParseException e1){
+                    e1.printStackTrace();
+                }
             }
         });
     }

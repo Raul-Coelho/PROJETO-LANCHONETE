@@ -1,6 +1,7 @@
 package view;
 
 import control.GerenciaCardapio;
+import exception.ValorNegativoException;
 import model.Produto;
 
 import javax.swing.*;
@@ -61,10 +62,15 @@ public class TelaCardapio extends JDialog {
                     JOptionPane.showMessageDialog(null,"Informe um Numero Valido","Erro",JOptionPane.ERROR_MESSAGE);
                 }else {
                     try {
-                        if (GerenciaCardapio.Salvar(new Produto((Integer) spinner1.getValue(), textField2.getText(), Float.parseFloat(textField3.getText()), textArea1.getText()))) {
-                            JOptionPane.showMessageDialog(null, "Produto Cadastrado!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Produto Não Cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
+                        if (textField2.getText().equals("") || textField3.getText().equals("")){
+                            JOptionPane.showMessageDialog(null, "É necessário preencher os Campos", "Falha", JOptionPane.ERROR_MESSAGE);
+                        }
+                        else {
+                            if (GerenciaCardapio.Salvar(new Produto((Integer) spinner1.getValue(), textField2.getText(), Float.parseFloat(textField3.getText()), textArea1.getText()))) {
+                                JOptionPane.showMessageDialog(null, "Produto Cadastrado!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Produto Não Cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
+                            }
                         }
                     } catch (IOException ex) {
                         JOptionPane.showMessageDialog(null, "Falha no acesso ao Arquivo", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -72,6 +78,8 @@ public class TelaCardapio extends JDialog {
                         JOptionPane.showMessageDialog(null, "Preencha Com um Numero", "Erro", JOptionPane.ERROR_MESSAGE);
                     } catch (HeadlessException | ClassNotFoundException e1) {
                         JOptionPane.showMessageDialog(null, "Erro ao Salvar", "Erro", JOptionPane.ERROR_MESSAGE);
+                    } catch (ValorNegativoException e1) {
+                        JOptionPane.showMessageDialog(null, "Valor inválido para preço!", "Falha", JOptionPane.ERROR_MESSAGE);
                     }
                     TelaPrincipal principal = new TelaPrincipal();
                     principal.pack();
@@ -87,12 +95,16 @@ public class TelaCardapio extends JDialog {
                     JOptionPane.showMessageDialog(null,"Informe um Numero Valido","Erro",JOptionPane.ERROR_MESSAGE);
                 }else {
                     try {
-                        if (GerenciaCardapio.isRemover((Integer) spinner1.getValue())) {
-                            limpar();
-                            spinner1.setValue(0);
-                            JOptionPane.showMessageDialog(null, "Produto Excluido!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Produto Não Foi Excluido ou Não Está Cadastrado!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+                        if (textField2.getText().equals("") || textField3.getText().equals("")){
+                            JOptionPane.showMessageDialog(null, "É necessário preencher os Campos", "Falha", JOptionPane.ERROR_MESSAGE);
+                        }else {
+                            if (GerenciaCardapio.isRemover((Integer) spinner1.getValue())) {
+                                limpar();
+                                spinner1.setValue(0);
+                                JOptionPane.showMessageDialog(null, "Produto Excluido!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Produto Não Foi Excluido ou Não Está Cadastrado!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+                            }
                         }
                     } catch (HeadlessException | ClassNotFoundException e1) {
                         JOptionPane.showMessageDialog(null, "Erro ao Excluir", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -113,17 +125,15 @@ public class TelaCardapio extends JDialog {
                     JOptionPane.showMessageDialog(null,"Informe um Numero Valido","Erro",JOptionPane.ERROR_MESSAGE);
                 }else {
                     try {
-                        GerenciaCardapio.isRemover((Integer) spinner1.getValue());
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    } catch (ClassNotFoundException e1) {
-                        e1.printStackTrace();
-                    }
-                    try {
-                        if (GerenciaCardapio.Salvar(new Produto((Integer) spinner1.getValue(), textField2.getText(), Float.parseFloat(textField3.getText()), textArea1.getText()))) {
-                            JOptionPane.showMessageDialog(null, "Produto Atualizado!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Produto Não Atualizado", "Erro", JOptionPane.ERROR_MESSAGE);
+                        if (textField2.getText().equals("") || textField3.getText().equals("")){
+                            JOptionPane.showMessageDialog(null, "É necessário preencher os Campos", "Falha", JOptionPane.ERROR_MESSAGE);
+                        }else {
+                            GerenciaCardapio.isRemover((Integer) spinner1.getValue());
+                            if (GerenciaCardapio.Salvar(new Produto((Integer) spinner1.getValue(), textField2.getText(), Float.parseFloat(textField3.getText()), textArea1.getText()))) {
+                                JOptionPane.showMessageDialog(null, "Produto Atualizado!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Produto Não Atualizado", "Erro", JOptionPane.ERROR_MESSAGE);
+                            }
                         }
                     } catch (IOException ex) {
                         JOptionPane.showMessageDialog(null, "Falha no acesso ao Arquivo", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -131,6 +141,8 @@ public class TelaCardapio extends JDialog {
                         JOptionPane.showMessageDialog(null, "Preencha Com um Numero", "Erro", JOptionPane.ERROR_MESSAGE);
                     } catch (HeadlessException | ClassNotFoundException e1) {
                         JOptionPane.showMessageDialog(null, "Erro ao Salvar", "Erro", JOptionPane.ERROR_MESSAGE);
+                    } catch (ValorNegativoException e1) {
+                        JOptionPane.showMessageDialog(null, "Valor inválido para preço!", "Falha", JOptionPane.ERROR_MESSAGE);
                     }
                     TelaPrincipal principal = new TelaPrincipal();
                     principal.pack();

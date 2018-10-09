@@ -1,6 +1,5 @@
 package view;
 
-import control.GerenciaCardapio;
 import control.GerenciaComanda;
 import model.Pedido;
 
@@ -60,8 +59,8 @@ public class TelaVerPedidos extends JDialog {
         total = 0f;
         String atendido;
         for (Pedido p: GerenciaComanda.unicaComanda(TelaMesas.getMesa()).getPedidos()){
-            atendido = p.Status()?"<<  Atendido":" Nao Atendido";
-            listModel.addElement(p.getIdPedido()+"- Quantidade: "+p.getQuantidade()+" "+p.getProduto().getNome()+atendido+" Subtotal: R$ "+p.getSubtotal());
+            atendido = p.isAberto()?" Não Atendido":" Atendido";
+            listModel.addElement(p.getIdPedido()+"- Quantidade: "+p.getQuantidade()+"- "+p.getProduto().getNome()+atendido+" Subtotal: R$ "+p.getSubtotal());
             total+=p.getProduto().getPrecoUnitario();
         }
         list1 = new JList<>();

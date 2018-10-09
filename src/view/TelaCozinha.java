@@ -29,6 +29,10 @@ public class TelaCozinha extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 if (comboBox1.getSelectedItem()!=null && Cozinha.AtenderPedido(Integer.parseInt(((String)comboBox1.getSelectedItem()).split(":")[0]))){
                     JOptionPane.showMessageDialog(null, "Pedido Atendido!");
+                    TelaCozinha cozinha = new TelaCozinha();
+                    cozinha.pack();
+                    dispose();
+                    cozinha.setVisible(true);
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "Não existe Pedidos para Atender!");

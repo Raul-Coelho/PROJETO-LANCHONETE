@@ -43,13 +43,13 @@ public class Gerencia extends DaoArrayListGenerrico {
     public static ArrayList<Comanda> listarComandas(LocalDate inicio, LocalDate fim) throws IOException, ClassNotFoundException {
         ArrayList<Comanda> gerencia = getEstrutura(file);
         ArrayList<Comanda> comandas = new ArrayList<>();
-        String com = "";
         for (Comanda comanda : gerencia) {
             if (comanda.getData().isAfter(inicio.plusDays(-1)) && comanda.getData().isBefore(fim.plusDays(1))) {
                 comandas.add(comanda);
             }
         }
         return comandas;
+
     }
 
     /**

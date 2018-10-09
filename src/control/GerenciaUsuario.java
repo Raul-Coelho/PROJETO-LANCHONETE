@@ -1,10 +1,13 @@
 package control;
 import dao.DaoHashMapGenerico;
+import exception.CampoVazioException;
+import exception.DataNascimentoException;
 import model.Funcionario;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -37,7 +40,8 @@ public class GerenciaUsuario extends DaoHashMapGenerico<Funcionario> {
      * Metodo usado para cadastrar um novo usuário
      * @return se tem ou não um funcionário salvo com o mesmo email
      */
-    public static boolean isSalvar(Funcionario usuario) throws IOException, ClassNotFoundException {
+    public static boolean isSalvar(Funcionario usuario) throws IOException, ClassNotFoundException, DataNascimentoException, CampoVazioException {
+        validaUsuario(usuario);
         HashMap<String, Funcionario> usuarios = getEstrutura(file);
         if(Buscar(usuario.getEmail())== null) {
             usuarios.put(usuario.getEmail(), usuario);
@@ -88,7 +92,8 @@ public class GerenciaUsuario extends DaoHashMapGenerico<Funcionario> {
      * Metodo edita dados do usuário
      * @return o usuário salvo se ele estiver cadastrado
      */
-    public static boolean Editar(String email, Funcionario usuario) throws IOException, ClassNotFoundException {
+    public static boolean Editar(String email, Funcionario usuario) throws IOException, ClassNotFoundException, DataNascimentoException, CampoVazioException {
+        validaUsuario(usuario);
         if (Buscar(email)!= null){
             Remove(email);
             return isSalvar(usuario);
@@ -132,6 +137,23 @@ public class GerenciaUsuario extends DaoHashMapGenerico<Funcionario> {
             return null;
         }
         return usuario;
+    }
+
+    /**
+     *
+     * @param usuario
+     * @throws DataNascimentoException
+     * @throws CampoVazioException
+     */
+
+    public static void validaUsuario(Funcionario usuario) throws DataNascimentoException, CampoVazioException {
+        if(usuario.getCpf().equals("   .   .   -  ")) {
+            throw new CampoVazioException();
+        }
+        if(usuario.getNascimento().isAfter(LocalDate.now())) {
+            throw new DataNascimentoException();
+        }
+
     }
 
 }

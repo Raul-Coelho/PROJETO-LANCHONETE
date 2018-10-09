@@ -1,6 +1,8 @@
 package view;
 
 import control.GerenciaUsuario;
+import exception.CampoVazioException;
+import exception.DataNascimentoException;
 import model.Funcionario;
 
 import javax.swing.*;
@@ -12,6 +14,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class TelaEditarUsuario extends JDialog {
     private JPanel contentPane;
@@ -24,6 +27,7 @@ public class TelaEditarUsuario extends JDialog {
     private JComboBox comboBox1;
     private JButton editarButton;
     private JButton voltarButton;
+    private JButton excluirButton;
     private JButton buttonOK;
     private LocalDate nascimento;
 
@@ -52,13 +56,40 @@ public class TelaEditarUsuario extends JDialog {
                     Funcionario usuario = new Funcionario(textField1.getText(),formattedCpf.getText(),nascimento,textField2.getText(), new String(passwordField1.getPassword()),formattedTelefone.getText(), Funcionario.Setor.valueOf((String) comboBox1.getSelectedItem()));
                     GerenciaUsuario.Editar(TelaInicial.retornaUsuario().getEmail(),usuario);
                     TelaInicial.setarUsuario(usuario);
-
                     TelaPrincipal principal = new TelaPrincipal();
                     principal.pack();
                     dispose();
                     principal.setVisible(true);
-                }catch(ClassNotFoundException | IOException ex) {
-                    JOptionPane.showMessageDialog(null, "Falha ao acessar arquivo", "Falha", JOptionPane.ERROR_MESSAGE);
+                }catch(DateTimeParseException ex){
+                    JOptionPane.showMessageDialog(null, "Formato de data Invalido!", "Invalido", JOptionPane.ERROR_MESSAGE);
+                }catch (HeadlessException | ClassNotFoundException ex) {
+                    JOptionPane.showMessageDialog(null, "Falha ao editar usuário!", "Falha", JOptionPane.ERROR_MESSAGE);
+                }catch(IOException ex) {
+                    JOptionPane.showMessageDialog(null, "Falha ao acessar arquivo!", "Falha", JOptionPane.ERROR_MESSAGE);
+                } catch (DataNascimentoException ex) {
+                    JOptionPane.showMessageDialog(null, "Data de nascimento após a data atual!", "Data de nascimento Invalida", JOptionPane.ERROR_MESSAGE);
+                } catch (CampoVazioException ex) {
+                    JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!", "Campo Vazio", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        excluirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (JOptionPane.showConfirmDialog(null,"Seu usuario Será excluido e você será redirecionado a Tela de Login Continuar?","Informação",JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION){
+                    try {
+                        GerenciaUsuario.Remove(TelaInicial.retornaUsuario().getEmail());
+                        JOptionPane.showMessageDialog(null,"Usuario Removido !","Informação",JOptionPane.INFORMATION_MESSAGE);
+                        TelaInicial inicial = new TelaInicial();
+                        inicial.pack();
+                        dispose();
+                        inicial.setVisible(true);
+                    } catch (HeadlessException | ClassNotFoundException | IOException e1) {
+                        JOptionPane.showMessageDialog(null, "Falha ao Remover Usuario", "Falha", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,"Usuario não Removido !", "Erro" , JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

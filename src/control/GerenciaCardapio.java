@@ -1,6 +1,7 @@
 package control;
 
 import dao.DaoArrayListGenerrico;
+import exception.ValorNegativoException;
 import model.Produto;
 
 import java.io.File;
@@ -81,7 +82,10 @@ public class GerenciaCardapio extends DaoArrayListGenerrico<Produto>{
      * Metodo Salva os produtos
      * @return produto adicionado
      */
-    public static boolean Salvar(Produto produto) throws IOException, ClassNotFoundException {
+    public static boolean Salvar(Produto produto) throws IOException, ClassNotFoundException, ValorNegativoException {
+        if(produto.getPrecoUnitario()<=0) {
+            throw new ValorNegativoException();
+        }
         ArrayList<Produto> produtos = getEstrutura(file);
         if(Buscar(produto.getCodProduto()) >=0 ) {
             return false;

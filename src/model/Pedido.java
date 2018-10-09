@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -10,14 +11,14 @@ import java.time.LocalTime;
  * @version 1.o
  */
 
-public class Pedido {
+public class Pedido implements Serializable {
     private Produto produto;
     private static int id;
     private int idPedido;
     private int quantidade;
     private float subtotal;
     private int mesa;
-    private boolean status;
+    private boolean isAberto;
     private LocalTime horaPedido;
     private LocalDate dataPedido;
 
@@ -32,7 +33,7 @@ public class Pedido {
         idPedido = ++id;
         this.quantidade = quantidade;
         this.subtotal = subtotal;
-        status = false;
+        isAberto = true;
         horaPedido = LocalTime.now();
         dataPedido = LocalDate.now();
     }
@@ -66,15 +67,15 @@ public class Pedido {
         this.idPedido = idPedido;
     }
 
-    public boolean Status() {
-        return status;
+    public boolean isAberto() {
+        return isAberto;
     }
-    public void mudarStatus(){
-        status = true;
+    public boolean mudarIsAberto(){
+        return isAberto = false;
     }
 
-    public boolean setStatus(boolean status) {
-        this.status = status;
+    public boolean setIsAberto(boolean status) {
+        this.isAberto = status;
         return status;
     }
 
@@ -124,8 +125,8 @@ public class Pedido {
      */
     @Override
     public String toString() {
-        String s = Status()? "Atendido":"Ñ atendido";
-        return quantidade+" - "+produto.getNome()+" - Subtotal: "+getSubtotal()+" -- n°:"+getIdPedido()+" ==> "+s+"\n";
+        String s = isAberto()? " Não Atendido":" Atendido";
+        return quantidade+" - "+produto.getNome()+" - Subtotal: "+getSubtotal()+" - n:"+getIdPedido()+" -> "+s+"\n";
     }
 }
 

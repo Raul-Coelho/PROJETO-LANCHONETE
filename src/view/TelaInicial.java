@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 
-public class TelaInicial extends JFrame {
+public class TelaInicial extends JDialog {
     
     private static Funcionario usuario;
     private JPanel contentPane;
@@ -32,7 +32,7 @@ public class TelaInicial extends JFrame {
         setContentPane(contentPane);
         setLocation(400,80);
         setTitle("Bem Vindo !");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setSize(450,520);
         setLocationRelativeTo(null);
         setIconImage(new ImageIcon("images/icon1.jpg").getImage());
@@ -60,14 +60,10 @@ public class TelaInicial extends JFrame {
                                 "Mensagem de erro",
                                 JOptionPane.ERROR_MESSAGE);
                     }
-                } catch (HandlerException ex) {
-                    System.out.println("HandlerException");
-                } catch (FileNotFoundException e1) {
+                } catch (HeadlessException | ClassNotFoundException e1) {
                     e1.printStackTrace();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                } catch (ClassNotFoundException e1) {
-                    e1.printStackTrace();
+                } catch(IOException e1){
+                    JOptionPane.showMessageDialog(null, "Falha ao acessar arquivo", "Falha", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

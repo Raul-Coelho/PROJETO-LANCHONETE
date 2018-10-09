@@ -99,11 +99,10 @@ public class TelaMesas extends JDialog {
                 if((Integer)spinner1.getValue() <= 0){
                     JOptionPane.showMessageDialog(null,"Informe um Numero Valido","Erro",JOptionPane.ERROR_MESSAGE);
                 }else {
-                    Comanda comanda = null;
-
-                    comanda = GerenciaComanda.unicaComanda((Integer) spinner1.getValue());
-
                     try {
+                        Comanda comanda = null;
+
+                        comanda = GerenciaComanda.unicaComanda((Integer) spinner1.getValue());
                         if (comanda != null && GerenciaComanda.FecharComanda(comanda.getMesa())) {
                             JOptionPane.showMessageDialog(null, "Comanda Encerrada!\n" + "Valor Total:" + comanda.valorTotal());
                         } else {
@@ -112,7 +111,7 @@ public class TelaMesas extends JDialog {
                     } catch (HeadlessException | ClassNotFoundException ex) {
                         JOptionPane.showMessageDialog(null, "Erro ao Encerrar Comanda", "Erro", JOptionPane.ERROR_MESSAGE);
                     } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(null, "Falha no acesso ao arquivo", "Falha", JOptionPane.ERROR_MESSAGE);
+                        ex.printStackTrace();
                     }
                 }
             }

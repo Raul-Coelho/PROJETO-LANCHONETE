@@ -1,6 +1,8 @@
 package view;
 
 import control.GerenciaUsuario;
+import exception.CampoVazioException;
+import exception.DataNascimentoException;
 import model.Funcionario;
 
 import javax.swing.*;
@@ -13,6 +15,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -74,10 +77,16 @@ public class TelaCadastro extends JDialog {
                                     "Mensagem de Erro",
                                     JOptionPane.ERROR_MESSAGE);
                         }
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    } catch (ClassNotFoundException e1) {
-                        e1.printStackTrace();
+                    }catch(DateTimeParseException ex){
+                        JOptionPane.showMessageDialog(null, "Formato de data Invalido!", "Invalido", JOptionPane.ERROR_MESSAGE);
+                    }catch (HeadlessException | ClassNotFoundException ex) {
+                        JOptionPane.showMessageDialog(null, "Falha ao editar usuário!", "Falha", JOptionPane.ERROR_MESSAGE);
+                    }catch(IOException ex) {
+                        JOptionPane.showMessageDialog(null, "Falha ao acessar arquivo!", "Falha", JOptionPane.ERROR_MESSAGE);
+                    } catch (DataNascimentoException ex) {
+                        JOptionPane.showMessageDialog(null, "Data de nascimento após a data atual!", "Data de nascimento Invalida", JOptionPane.ERROR_MESSAGE);
+                    } catch (CampoVazioException ex) {
+                        JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!", "Campo Vazio", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 else {
