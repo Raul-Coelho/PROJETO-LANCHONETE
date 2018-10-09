@@ -106,7 +106,7 @@ public class TelaMesas extends JDialog {
                         if (comanda != null && GerenciaComanda.FecharComanda(comanda.getMesa())) {
                             JOptionPane.showMessageDialog(null, "Comanda Encerrada!\n" + "Valor Total:" + comanda.valorTotal());
                         } else {
-                            JOptionPane.showMessageDialog(null, "A comanda não existe ou seus pedidos não foram atendidos");
+                            JOptionPane.showMessageDialog(null, "Os pedidos da comanda ainda não foram atendidos!");
                         }
                     } catch (HeadlessException | ClassNotFoundException ex) {
                         JOptionPane.showMessageDialog(null, "Erro ao Encerrar Comanda", "Erro", JOptionPane.ERROR_MESSAGE);

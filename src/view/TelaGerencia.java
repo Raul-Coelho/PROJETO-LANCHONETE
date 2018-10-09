@@ -4,6 +4,7 @@ import com.sun.javaws.util.JfxHelper;
 import control.Gerencia;
 import control.GerenciaCardapio;
 import control.GerenciaComanda;
+import exception.DataNascimentoException;
 import model.Comanda;
 import model.Funcionario;
 
@@ -18,8 +19,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.zip.DataFormatException;
 
 public class TelaGerencia extends JDialog {
     private JPanel contentPane;
@@ -52,24 +55,30 @@ public class TelaGerencia extends JDialog {
                     inicio = LocalDate.parse(formattedInicio.getText(), formatter);
                     fim = LocalDate.parse(formattedFim.getText(), formatter);
 
-                    comandas = Gerencia.listarComandas(inicio, fim);
+                    if (inicio.isAfter(fim)) {
+                        throw new DataNascimentoException();
+                    } else {
+                        comandas = Gerencia.listarComandas(inicio, fim);
 
-                    int quant = model.getRowCount();
-                    if (quant > 0) {
-                        for (int i = 0; i < quant; i++) {
-                            model.removeRow(0);
+                        int quant = model.getRowCount();
+                        if (quant > 0) {
+                            for (int i = 0; i < quant; i++) {
+                                model.removeRow(0);
+                            }
                         }
-                    }
                         for (Comanda c : comandas) {
                             model.addRow(new String[]{"Data: " + c.getData().toString(), "Mesa: " + c.getMesa(), "R$ " + c.valorTotal() + " "});
                         }
-
-
-                    } catch(IOException e1){
+                    }
+                }catch (DateTimeParseException e1){
+                    JOptionPane.showMessageDialog(null,"Data Invalida!","Erro", JOptionPane.ERROR_MESSAGE);
+                     }catch(IOException e1){
                         e1.printStackTrace();
                     } catch(ClassNotFoundException e1){
                         e1.printStackTrace();
-                    }
+                    }catch (DataNascimentoException e1){
+                        JOptionPane.showMessageDialog(null,"Data Invalida!","Erro", JOptionPane.ERROR_MESSAGE);
+                }
                 }
         });
         voltarButton.addActionListener(new ActionListener() {

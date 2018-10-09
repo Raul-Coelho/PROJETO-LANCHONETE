@@ -57,25 +57,29 @@ public class TelaCadastro extends JDialog {
                 String cpf = formattedTextField2.getText();
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate nascimento = LocalDate.parse(formattedTextField1.getText(), formatter);
 
                 String email;
-                if (validarEmail(textField3.getText())){
-                    email = textField3.getText();
-                    String senha = new String(passwordField1.getPassword());
-                    String telefone = formattedTextField3.getText();
-                    Funcionario.Setor setor = (Funcionario.Setor) comboBox1.getSelectedItem();
-
-                    Funcionario usuario = new Funcionario(nome, cpf, nascimento, email, senha, telefone, setor);
-
                     try {
-                        if (gU.isSalvar(usuario)) {
-                            JOptionPane.showMessageDialog(null, "Salvo !");
-                        } else {
-                            JOptionPane.showMessageDialog(null,
-                                    "Já existe um usuário com esse login",
-                                    "Mensagem de Erro",
-                                    JOptionPane.ERROR_MESSAGE);
+                        LocalDate nascimento = LocalDate.parse(formattedTextField1.getText(), formatter);
+                        if (validarEmail(textField3.getText())) {
+                            email = textField3.getText();
+                            String senha = new String(passwordField1.getPassword());
+                            String telefone = formattedTextField3.getText();
+                            Funcionario.Setor setor = (Funcionario.Setor) comboBox1.getSelectedItem();
+
+                            Funcionario usuario = new Funcionario(nome, cpf, nascimento, email, senha, telefone, setor);
+
+                            if (gU.isSalvar(usuario)) {
+                                JOptionPane.showMessageDialog(null, "Salvo !");
+                                dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(null,
+                                        "Já existe um usuário com esse login",
+                                        "Mensagem de Erro",
+                                        JOptionPane.ERROR_MESSAGE);
+                            }
+                        }else {
+                            JOptionPane.showMessageDialog(null,"Infome um Email Valido!", "Erro", JOptionPane.ERROR_MESSAGE);
                         }
                     }catch(DateTimeParseException ex){
                         JOptionPane.showMessageDialog(null, "Formato de data Invalido!", "Invalido", JOptionPane.ERROR_MESSAGE);
@@ -88,10 +92,6 @@ public class TelaCadastro extends JDialog {
                     } catch (CampoVazioException ex) {
                         JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!", "Campo Vazio", JOptionPane.ERROR_MESSAGE);
                     }
-                }
-                else {
-                    JOptionPane.showMessageDialog(null,"Infome um Email Valido!", "Erro", JOptionPane.ERROR_MESSAGE);
-                }
             }
         });
     }
